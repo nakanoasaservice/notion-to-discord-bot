@@ -96,10 +96,14 @@ function formatProperty(property: RemoveId<Property>): string {
 		case "created_time":
 			return property.created_time ?? "[No Time]";
 		case "unique_id":
-			return property.unique_id?.number?.toString() ?? "[No ID]";
+			return property.unique_id.number == null
+				? "[No ID]"
+				: property.unique_id.prefix === null
+					? property.unique_id.number.toString()
+					: `${property.unique_id.prefix}-${property.unique_id.number}`;
 		case "relation":
 			return (
-				property.relation?.map((relation) => relation.id).join(", ") ??
+				property.relation.map((relation) => relation.id).join(", ") ||
 				"[No Relations]"
 			);
 		case "people":
