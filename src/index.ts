@@ -10,31 +10,30 @@ import type {
 type RemoveId<T> = T extends unknown ? Omit<T, "id"> : never;
 type Property = PageObjectResponse["properties"][number];
 
-const app = new Hono();
-
-class DiscordAPIError extends Error {
-	constructor(
-		public status: number,
-		public body: unknown,
-	) {
-		super(`Discord API error: ${status}`);
-		this.name = "DiscordAPIError";
-	}
+interface NotionWebhookBody {
+	data: PageObjectResponse;
 }
 
-async function discordCreateMessage(
+interface Env {
+	DISCORD_BOT_TOKEN: string;
+}
+
+interface DiscordErrorResponse {
+	code: number;
+	message: string;
+}
+
+async function sendDiscordMessage(
+	token: string,
 	channelId: string,
 	message: RESTPostAPIChannelMessageJSONBody,
 ) {
-	if (!channelId) {
-		throw new Error("Discord channel ID is required");
-	}
-
 	const response = await fetch(
 		`https://discord.com/api/v10/channels/${channelId}/messages`,
 		{
 			method: "POST",
 			headers: {
+				Authorization: `Bot ${token}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(message),
@@ -42,15 +41,15 @@ async function discordCreateMessage(
 	);
 
 	if (!response.ok) {
-		const errorBody = await response.json();
-		throw new DiscordAPIError(response.status, errorBody);
+		const errorBody = (await response.json()) as DiscordErrorResponse;
+		console.error(errorBody);
+
+		throw new Error(
+			`Discord API error: ${response.status} - ${errorBody.message}`,
+		);
 	}
 
 	return response;
-}
-
-interface NotionWebhookBody {
-	properties: Record<string, Property>;
 }
 
 function isUserObjectResponse(
@@ -96,7 +95,7 @@ function formatProperty(property: RemoveId<Property>): string {
 		case "created_time":
 			return property.created_time ?? "[No Time]";
 		case "unique_id":
-			return property.unique_id.number == null
+			return property.unique_id.number === null
 				? "[No ID]"
 				: property.unique_id.prefix === null
 					? property.unique_id.number.toString()
@@ -131,40 +130,34 @@ function formatProperty(property: RemoveId<Property>): string {
 					return "[Unsupported Rollup Type]";
 			}
 		default:
-			return `[Unsupported Type: ${(property as unknown as { type: string }).type}]`;
+			return `[Unsupported Type: ${JSON.stringify(property, null, 2)}]`;
 	}
 }
 
-// send message to discord channel
+const app = new Hono<{ Bindings: Env }>();
+
 app.post("/:discordChannelId", async (c) => {
 	try {
+		if (!c.env.DISCORD_BOT_TOKEN) {
+			throw new Error("Discord bot token is not configured");
+		}
+
 		const discordChannelId = c.req.param("discordChannelId");
 		const body = await c.req.json<NotionWebhookBody>();
 
-		const formattedProperties = Object.entries(body.properties)
+		console.log(body);
+
+		const formattedProperties = Object.entries(body.data.properties)
 			.map(([key, property]) => `${key}: ${formatProperty(property)}`)
 			.join("\n");
 
-		await discordCreateMessage(discordChannelId, {
+		await sendDiscordMessage(c.env.DISCORD_BOT_TOKEN, discordChannelId, {
 			content: formattedProperties || "[No properties to display]",
 		});
 
 		return c.json({ message: "ok" });
 	} catch (error) {
 		console.error("Error processing webhook:", error);
-
-		if (error instanceof DiscordAPIError) {
-			return c.json(
-				{
-					error: "Discord API Error",
-					status: error.status,
-					details: error.body,
-				},
-				{
-					status: error.status,
-				},
-			);
-		}
 
 		if (error instanceof HTTPException) {
 			return c.json(
