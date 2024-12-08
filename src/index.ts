@@ -152,7 +152,11 @@ app.post("/:discordChannelId", async (c) => {
 			.join("\n");
 
 		await sendDiscordMessage(c.env.DISCORD_BOT_TOKEN, discordChannelId, {
-			content: [title, formattedProperties || "[No properties to display]"]
+			content: [
+				title,
+				formattedProperties || "[No properties to display]",
+				body.data.url,
+			]
 				.filter(Boolean)
 				.join("\n"),
 		});
