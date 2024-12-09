@@ -126,6 +126,10 @@ function formatProperty(property: RemoveId<Property>): string {
 						property.rollup.array?.map(formatProperty).join(", ") ??
 						"[Empty Rollup Array]"
 					);
+				case "date":
+					return property.rollup.date?.start
+						? `${property.rollup.date.start} - ${property.rollup.date.end}`
+						: (property.rollup.date?.start ?? "[Invalid Date]");
 				default:
 					return "[Unsupported Rollup Type]";
 			}
