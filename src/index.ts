@@ -177,7 +177,7 @@ app.post("/:discordChannelId", async (c) => {
 			.join("\n"),
 	});
 
-	return c.status(201);
+	return c.body(null, 204);
 });
 
 export default app;
