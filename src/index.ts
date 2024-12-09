@@ -173,7 +173,7 @@ app.post("/:discordChannelId", async (c) => {
 			.join("\n"),
 	});
 
-	return c.json({ message: "ok" }, 201);
+	return c.status(201);
 });
 
 export default app;
