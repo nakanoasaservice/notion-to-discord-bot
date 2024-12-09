@@ -147,6 +147,10 @@ function formatProperty(property: RemoveId<Property>): string {
 
 const app = new Hono<{ Bindings: Env }>();
 
+app.get("/", (c) => {
+	return c.json({ message: "ok" }, 200);
+});
+
 app.post("/:discordChannelId", async (c) => {
 	if (!c.env.DISCORD_BOT_TOKEN) {
 		console.error("Discord bot token is not configured");
