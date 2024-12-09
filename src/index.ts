@@ -5,7 +5,6 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 import type { RESTPostAPIChannelMessageJSONBody } from "discord-api-types/v10";
 import { Hono } from "hono";
-import { HTTPException } from "hono/http-exception";
 
 type RemoveId<T> = T extends unknown ? Omit<T, "id"> : never;
 type Property = PageObjectResponse["properties"][number];
@@ -154,9 +153,7 @@ app.get("/", (c) => {
 app.post("/:discordChannelId", async (c) => {
 	if (!c.env.DISCORD_BOT_TOKEN) {
 		console.error("Discord bot token is not configured");
-		throw new HTTPException(500, {
-			message: "Discord bot token is not configured",
-		});
+		return c.body(null, 500);
 	}
 
 	const title = c.req.query("title");
