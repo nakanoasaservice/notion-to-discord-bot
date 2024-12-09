@@ -152,8 +152,7 @@ app.get("/", (c) => {
 
 app.post("/:discordChannelId", async (c) => {
 	if (!c.env.DISCORD_BOT_TOKEN) {
-		console.error("Discord bot token is not configured");
-		return c.body(null, 500);
+		throw new Error("DISCORD_BOT_TOKEN is not set");
 	}
 
 	const title = c.req.query("title");
