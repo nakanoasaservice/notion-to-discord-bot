@@ -11,15 +11,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@cloudflare/vitest-pool-workers": "^0.5.2",
+    "@cloudflare/vitest-pool-workers": "^0.5.34",
     "@cloudflare/workers-types": "^4.20241205.0",
     "@notionhq/client": "^2.2.15",
     "discord-api-types": "^0.37.110",
-    "typescript": "^5.5.2",
+    "typescript": "^5.7.2",
     "vitest": "2.0.5",
-    "wrangler": "^3.60.3"
+    "wrangler": "^3.93.0"
   },
   "dependencies": {
-    "hono": "^4.6.12"
+    "hono": "^4.6.13"
   }
 }
