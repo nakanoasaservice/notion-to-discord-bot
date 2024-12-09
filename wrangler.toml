@@ -24,8 +24,6 @@ enabled = true
 # - https://developers.cloudflare.com/workers/configuration/secrets/
 # [vars]
 # MY_VARIABLE = "production_value"
-# Discord Bot Token should be set using `wrangler secret put DISCORD_BOT_TOKEN`
-# DISCORD_BOT_TOKEN = ""
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai
