@@ -150,14 +150,12 @@ const app = new Hono<{ Bindings: Env }>();
 app.post("/:discordChannelId", async (c) => {
 	if (!c.env.DISCORD_BOT_TOKEN) {
 		console.error("Discord bot token is not configured");
-
 		throw new HTTPException(500, {
 			message: "Discord bot token is not configured",
 		});
 	}
 
 	const title = c.req.query("title");
-
 	const discordChannelId = c.req.param("discordChannelId");
 	const body = await c.req.json<NotionWebhookBody>();
 
