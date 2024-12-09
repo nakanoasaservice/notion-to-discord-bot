@@ -2,7 +2,7 @@
 name = "notion-to-discord-bot"
 main = "src/index.ts"
 compatibility_date = "2024-12-05"
-compatibility_flags = ["nodejs_compat"]
+compatibility_flags = []
 
 # Workers Logs
 # Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
