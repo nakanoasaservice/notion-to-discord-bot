@@ -52,9 +52,18 @@ async function sendDiscordMessage(
 }
 
 function isUserObjectResponse(
-	user: PartialUserObjectResponse | UserObjectResponse,
-): user is UserObjectResponse {
-	return "type" in user;
+	person: PartialUserObjectResponse | UserObjectResponse,
+): person is UserObjectResponse {
+	return "type" in person;
+}
+
+function formatPerson(
+	person: PartialUserObjectResponse | UserObjectResponse,
+): string {
+	if (isUserObjectResponse(person)) {
+		return person.name ?? person.id;
+	}
+	return person.id;
 }
 
 function formatProperty(property: RemoveId<Property>): string {
@@ -98,9 +107,9 @@ function formatProperty(property: RemoveId<Property>): string {
 		case "last_edited_time":
 			return property.last_edited_time ?? "[No Time]";
 		case "created_by":
-			return property.created_by?.id ?? "[No User]";
+			return formatPerson(property.created_by);
 		case "last_edited_by":
-			return property.last_edited_by?.id ?? "[No User]";
+			return formatPerson(property.last_edited_by);
 		case "unique_id":
 			return property.unique_id.number === null
 				? "[No ID]"
@@ -113,16 +122,7 @@ function formatProperty(property: RemoveId<Property>): string {
 				"[No Relations]"
 			);
 		case "people":
-			return (
-				property.people
-					.map((person) => {
-						if (isUserObjectResponse(person)) {
-							return person.name ?? person.id;
-						}
-						return person.id;
-					})
-					.join(", ") || "[No People]"
-			);
+			return property.people.map(formatPerson).join(", ") || "[No People]";
 		case "rollup":
 			switch (property.rollup.type) {
 				case "number":
