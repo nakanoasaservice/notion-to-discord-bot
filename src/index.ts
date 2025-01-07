@@ -51,16 +51,10 @@ async function sendDiscordMessage(
 	return response;
 }
 
-function isUserObjectResponse(
-	person: PartialUserObjectResponse | UserObjectResponse,
-): person is UserObjectResponse {
-	return "type" in person;
-}
-
 function formatPerson(
 	person: PartialUserObjectResponse | UserObjectResponse,
 ): string {
-	if (isUserObjectResponse(person)) {
+	if ("type" in person) {
 		return person.name ?? person.id;
 	}
 	return person.id;
