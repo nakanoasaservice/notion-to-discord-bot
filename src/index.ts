@@ -60,6 +60,18 @@ function formatPerson(
 	return person.id;
 }
 
+function formatDate(
+	date: { start: string; end: string | null } | null,
+): string {
+	if (!date) return "[No Date]";
+
+	if (date.end) {
+		return `${date.start} - ${date.end}`;
+	}
+
+	return date.start;
+}
+
 function formatProperty(property: RemoveId<Property>): string {
 	switch (property.type) {
 		case "title":
@@ -82,10 +94,7 @@ function formatProperty(property: RemoveId<Property>): string {
 				"[No Selections]"
 			);
 		case "date":
-			if (!property.date) return "[No Date]";
-			return property.date.end
-				? `${property.date.start} - ${property.date.end}`
-				: (property.date.start ?? "[Invalid Date]");
+			return formatDate(property.date);
 		case "checkbox":
 			return property.checkbox ? "✅" : "❌";
 		case "email":
@@ -122,9 +131,7 @@ function formatProperty(property: RemoveId<Property>): string {
 				case "number":
 					return property.rollup.number?.toString() ?? "[No Rollup Number]";
 				case "date":
-					return property.rollup.date?.start
-						? `${property.rollup.date.start} - ${property.rollup.date.end}`
-						: (property.rollup.date?.start ?? "[Invalid Date]");
+					return formatDate(property.rollup.date);
 				case "array":
 					return (
 						property.rollup.array?.map(formatProperty).join(", ") ??
