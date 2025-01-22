@@ -126,6 +126,23 @@ function formatProperty(property: RemoveId<Property>): string {
 			);
 		case "people":
 			return property.people.map(formatPerson).join(", ") || "[No People]";
+		case "formula":
+			switch (property.formula.type) {
+				case "string":
+					return property.formula.string ?? "[No Formula String]";
+				case "number":
+					return property.formula.number?.toString() ?? "[No Formula Number]";
+				case "boolean":
+					return property.formula.boolean === null
+						? "[No Formula Boolean]"
+						: property.formula.boolean
+							? "✅"
+							: "❌";
+				case "date":
+					return formatDate(property.formula.date);
+				default:
+					return "[Unsupported Formula Type]";
+			}
 		case "rollup":
 			switch (property.rollup.type) {
 				case "number":
