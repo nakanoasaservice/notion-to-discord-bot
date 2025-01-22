@@ -143,6 +143,21 @@ function formatProperty(property: RemoveId<Property>): string {
 				default:
 					return "[Unsupported Formula Type]";
 			}
+		case "files":
+			return (
+				property.files
+					.map((file) => {
+						switch (file.type) {
+							case "file":
+								return `[${file.name}](${file.file.url})`;
+							case "external":
+								return `[${file.name}](${file.external.url})`;
+							default:
+								return file.name;
+						}
+					})
+					.join(", ") || "[No Files]"
+			);
 		case "rollup":
 			switch (property.rollup.type) {
 				case "number":
