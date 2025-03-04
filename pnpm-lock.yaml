@@ -8,9 +8,21 @@ importers:
 
   .:
     dependencies:
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      fast-csv:
+        specifier: ^5.0.2
+        version: 5.0.2
       hono:
         specifier: ^4.6.13
         version: 4.6.13
+      remeda:
+        specifier: ^2.21.0
+        version: 2.21.0
+      valibot:
+        specifier: 1.0.0-rc.3
+        version: 1.0.0-rc.3(typescript@5.7.2)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -428,6 +440,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@fast-csv/format@5.0.2':
+    resolution: {integrity: sha512-fRYcWvI8vs0Zxa/8fXd/QlmQYWWkJqKZPAXM+vksnplb3owQFKTPPh9JqOtD0L3flQw/AZjjXdPkD7Kp/uHm8g==}
+
+  '@fast-csv/parse@5.0.2':
+    resolution: {integrity: sha512-gMu1Btmm99TP+wc0tZnlH30E/F1Gw1Tah3oMDBHNPe9W8S68ixVHjt89Wg5lh7d9RuQMtwN+sGl5kxR891+fzw==}
+
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
@@ -704,6 +722,10 @@ packages:
     resolution: {integrity: sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==}
     engines: {node: '>=6'}
 
+  fast-csv@5.0.2:
+    resolution: {integrity: sha512-CnB2zYAzzeh5Ta0UhSf32NexLy2SsEsSMY+fMWPV40k1OgaLEbm9Hf5dms3z/9fASZHBjB6i834079gVeksEqQ==}
+    engines: {node: '>=10.0.0'}
+
   form-data@4.0.1:
     resolution: {integrity: sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==}
     engines: {node: '>= 6'}
@@ -751,6 +773,31 @@ packages:
 
   itty-time@1.0.6:
     resolution: {integrity: sha512-+P8IZaLLBtFv8hCkIjcymZOp4UJ+xW6bSlQsXGqrkmJh7vSiMFSlNne0mCYagEE0N7HDNR5jJBRxwN0oYv61Rw==}
+
+  lodash.escaperegexp@4.1.2:
+    resolution: {integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==}
+
+  lodash.groupby@4.6.0:
+    resolution: {integrity: sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==}
+
+  lodash.isboolean@3.0.3:
+    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
+
+  lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+
+  lodash.isfunction@3.0.9:
+    resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
+
+  lodash.isnil@4.0.0:
+    resolution: {integrity: sha512-up2Mzq3545mwVnMhTDMdfoG1OurpA/s5t88JmQX809eH3C8491iu2sfKhTfhQtKY78oPNhiaHJUpT/dUDAAtng==}
+
+  lodash.isundefined@3.0.1:
+    resolution: {integrity: sha512-MXB1is3s899/cD8jheYYE2V9qTHwKvt+npCwpD+1Sxm3Q3cECXCiYHjeHWXNwr6Q0SOBPrYUDxendrO6goVTEA==}
+
+  lodash.uniq@4.5.0:
+    resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
 
   loupe@3.1.2:
     resolution: {integrity: sha512-23I4pFZHmAemUnz8WZXbYRSKYj801VDaNv9ETuMh7IrMc7VuVVSo+Z9iLE3ni30+U48iDWfi30d3twAXBYmnCg==}
@@ -857,6 +904,9 @@ packages:
     resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
     engines: {node: '>= 14.16.0'}
 
+  remeda@2.21.0:
+    resolution: {integrity: sha512-ANFqOts3BsvW1MrKOv9SVHG3ly0MzzLa0HIu5qLkiRuEPGPuH9ny3sgd7VdHvC2VOUSN/7RkmabPlAda6JtGgg==}
+
   resolve@1.22.8:
     resolution: {integrity: sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==}
     hasBin: true
@@ -954,6 +1004,10 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
+  type-fest@4.36.0:
+    resolution: {integrity: sha512-3T/PUdKTCnkUmhQU6FFJEHsLwadsRegktX3TNHk+2JJB9HlA8gp1/VXblXVDI93kSnXF2rdPx0GMbHtJIV2LPg==}
+    engines: {node: '>=16'}
+
   typescript@5.7.2:
     resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
@@ -971,6 +1025,14 @@ packages:
 
   unenv-nightly@2.0.0-20241204-140205-a5d5190:
     resolution: {integrity: sha512-jpmAytLeiiW01pl5bhVn9wYJ4vtiLdhGe10oXlJBuQEX8mxjxO8BlEXGHU4vr4yEikjFP1wsomTHt/CLU8kUwg==}
+
+  valibot@1.0.0-rc.3:
+    resolution: {integrity: sha512-LT0REa7Iqx4QGcaHLiTiTkcmJqJ9QdpOy89HALFFBJgejTS64GQFRIbDF7e4f6pauQbo/myfKGmWXCLhMeM6+g==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   vite-node@2.0.5:
     resolution: {integrity: sha512-LdsW4pxj0Ot69FAoXZ1yTnA9bjGohr2yNBU7QKRxpz8ITSkhuDl6h3zS/tvgz4qrNjeRnvrWeXQ8ZF7Um4W00Q==}
@@ -1321,6 +1383,23 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
+  '@fast-csv/format@5.0.2':
+    dependencies:
+      lodash.escaperegexp: 4.1.2
+      lodash.isboolean: 3.0.3
+      lodash.isequal: 4.5.0
+      lodash.isfunction: 3.0.9
+      lodash.isnil: 4.0.0
+
+  '@fast-csv/parse@5.0.2':
+    dependencies:
+      lodash.escaperegexp: 4.1.2
+      lodash.groupby: 4.6.0
+      lodash.isfunction: 3.0.9
+      lodash.isnil: 4.0.0
+      lodash.isundefined: 3.0.1
+      lodash.uniq: 4.5.0
+
   '@fastify/busboy@2.1.1': {}
 
   '@jridgewell/gen-mapping@0.3.5':
@@ -1607,6 +1686,11 @@ snapshots:
 
   exit-hook@2.2.1: {}
 
+  fast-csv@5.0.2:
+    dependencies:
+      '@fast-csv/format': 5.0.2
+      '@fast-csv/parse': 5.0.2
+
   form-data@4.0.1:
     dependencies:
       asynckit: 0.4.0
@@ -1644,6 +1728,22 @@ snapshots:
   isexe@2.0.0: {}
 
   itty-time@1.0.6: {}
+
+  lodash.escaperegexp@4.1.2: {}
+
+  lodash.groupby@4.6.0: {}
+
+  lodash.isboolean@3.0.3: {}
+
+  lodash.isequal@4.5.0: {}
+
+  lodash.isfunction@3.0.9: {}
+
+  lodash.isnil@4.0.0: {}
+
+  lodash.isundefined@3.0.1: {}
+
+  lodash.uniq@4.5.0: {}
 
   loupe@3.1.2: {}
 
@@ -1731,6 +1831,10 @@ snapshots:
   printable-characters@1.0.42: {}
 
   readdirp@4.0.2: {}
+
+  remeda@2.21.0:
+    dependencies:
+      type-fest: 4.36.0
 
   resolve@1.22.8:
     dependencies:
@@ -1827,6 +1931,8 @@ snapshots:
 
   tslib@2.8.1: {}
 
+  type-fest@4.36.0: {}
+
   typescript@5.7.2: {}
 
   ufo@1.5.4: {}
@@ -1843,6 +1949,10 @@ snapshots:
       ohash: 1.1.4
       pathe: 1.1.2
       ufo: 1.5.4
+
+  valibot@1.0.0-rc.3(typescript@5.7.2):
+    optionalDependencies:
+      typescript: 5.7.2
 
   vite-node@2.0.5(@types/node@22.10.1):
     dependencies:

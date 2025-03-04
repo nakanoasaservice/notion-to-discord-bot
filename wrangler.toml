@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "notion-to-discord-bot"
+name = "drm-notion-integration"
 main = "src/index.ts"
 compatibility_date = "2024-12-05"
 compatibility_flags = []
@@ -25,7 +25,7 @@ mode = "smart"
 # [vars]
 # MY_VARIABLE = "production_value"
 
-# Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
+# Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare's global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai
 # [ai]
 # binding = "AI"
@@ -40,7 +40,7 @@ mode = "smart"
 # [browser]
 # binding = "MY_BROWSER"
 
-# Bind a D1 database. D1 is Cloudflare’s native serverless SQL database.
+# Bind a D1 database. D1 is Cloudflare's native serverless SQL database.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#d1-databases
 # [[d1_databases]]
 # binding = "MY_DB"
