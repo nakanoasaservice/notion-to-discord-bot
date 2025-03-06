@@ -45,22 +45,26 @@ export async function getStudents(studentIds: string[]): Promise<NotionPageId[]>
 
     for (let i = 0; i < batches.length; i++) {
       const batch = batches[i];
+      try {
+        const response = await notion.databases.query({
+          database_id: STUDENT_DATABASE_ID,
+          filter: {
+            or: batch.map(id => ({
+              property: 'LステップID',
+              rich_text: {
+                equals: id
+              }
+            }))
+          }
+        });
 
-      const response = await notion.databases.query({
-        database_id: STUDENT_DATABASE_ID,
-        filter: {
-          or: batch.map(id => ({
-            property: 'LステップID',
-            rich_text: {
-              equals: id
-            }
-          }))
-        }
-      });
-
-      // 結果のIDのみを抽出
-      const pageIds = response.results.map(page => page.id);
-      allResults = [...allResults, ...pageIds];
+        // 結果のIDのみを抽出
+        const pageIds = response.results.map(page => page.id);
+        allResults = [...allResults, ...pageIds];
+      } catch (batchError) {
+        console.error(`バッチ${i + 1}の処理中にエラーが発生しました:`, batchError);
+        throw batchError;
+      }
     }
 
     // 見つからなかった生徒IDがあれば報告
@@ -122,6 +126,40 @@ export async function createEvent(eventName: string, eventDate: string, students
     };
   } catch (error) {
     console.error('イベント登録エラー:', error);
+    throw error;
+  }
+}
+
+/**
+ * 既存のイベントを更新する関数
+ *
+ * @param pageId イベントページのID
+ * @param students 参加生徒のNotionページIDリスト
+ * @returns 更新されたイベントのID
+ */
+export async function updateEventParticipants(pageId: string, students: NotionPageId[]): Promise<{id: string}> {
+  try {
+    if (!pageId) {
+      throw new Error('有効なページIDが指定されていません');
+    }
+
+    // イベントページを更新
+    const response = await notion.pages.update({
+      page_id: pageId,
+      properties: {
+        '参加者': {
+          relation: students.map(studentId => ({
+            id: studentId
+          }))
+        }
+      }
+    });
+
+    return {
+      id: response.id
+    };
+  } catch (error) {
+    console.error('イベント更新エラー:', error);
     throw error;
   }
 }

@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import type { Env } from './types';
 import { initNotionClient } from './services/notion-service';
-import { processJsonRequest, processFormRequest } from './controllers/webhook-controller';
+import { processJsonRequest } from './controllers/webhook-controller';
 
 // アプリケーションの初期化
 const app = new Hono<{ Bindings: Env }>();
@@ -26,11 +26,20 @@ app.post('/webhook', async (c) => {
 
     if (contentType.includes('application/json')) {
       // JSONデータの処理
-      const jsonData = await c.req.json();
-      return await processJsonRequest(c, jsonData);
+      try {
+        const jsonData = await c.req.json();
+        return await processJsonRequest(c, jsonData);
+      } catch (jsonError) {
+        console.error('JSONデータの解析に失敗しました:', jsonError);
+        return c.json({
+          success: false,
+          error: `JSONデータの解析に失敗しました: ${jsonError instanceof Error ? jsonError.message : '不明なエラー'}`
+        }, 400);
+      }
     }
 
     // サポートされていないContent-Type
+    console.error(`サポートされていないContent-Type: ${contentType}`);
     return c.json({
       success: false,
       error: `サポートされていないContent-Type: ${contentType}. 'application/json'を使用してください`
