@@ -65,13 +65,18 @@ app.post("/:discordChannelId", async (c) => {
 	const body = await c.req.json<NotionWebhookBody>();
 
 	const formattedProperties = Object.entries(body.data.properties)
-		.map(([key, property]) => `${key}: ${formatProperty(property)}`)
+		.map(([key, property]) => `- ${key}: ${formatProperty(property)}`)
 		.join("\n");
 
 	await sendDiscordMessage(c.env.DISCORD_BOT_TOKEN, discordChannelId, {
-		content: [title, formattedProperties || "[No properties to display]"]
-			.filter(Boolean)
-			.join("\n"),
+		embeds: [
+			{
+				title,
+				description: formattedProperties || "[No properties to display]",
+				color: 0x2f3437,
+				url: body.data.url,
+			},
+		],
 		components: [
 			{
 				type: ComponentType.ActionRow,
