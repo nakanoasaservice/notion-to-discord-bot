@@ -1,7 +1,5 @@
 {
 	"editor.defaultFormatter": "biomejs.biome",
-    "editor.formatOnSave": true,
-    "cSpell.words": [
-        "notionhq"
-    ]
+	"editor.formatOnSave": true,
+	"cSpell.words": ["notionhq"]
 }
