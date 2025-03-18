@@ -1,8 +1,8 @@
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import {
+import type {
 	ButtonStyle,
 	ComponentType,
-	type RESTPostAPIChannelMessageJSONBody,
+	RESTPostAPIChannelMessageJSONBody,
 } from "discord-api-types/v10";
 import { Hono } from "hono";
 import { formatProperty } from "./formatter";
@@ -79,12 +79,12 @@ app.post("/:discordChannelId", async (c) => {
 		],
 		components: [
 			{
-				type: ComponentType.ActionRow,
+				type: 1 satisfies ComponentType,
 				components: [
 					{
-						type: ComponentType.Button,
+						type: 2 satisfies ComponentType,
 						label: "Open in Notion",
-						style: ButtonStyle.Link,
+						style: 5 satisfies ButtonStyle,
 						url: body.data.url,
 					},
 				],
