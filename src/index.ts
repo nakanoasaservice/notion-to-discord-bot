@@ -11,10 +11,6 @@ interface NotionWebhookBody {
 	data: PageObjectResponse;
 }
 
-interface Env {
-	DISCORD_BOT_TOKEN: string;
-}
-
 interface DiscordErrorResponse {
 	code: number;
 	message: string;
