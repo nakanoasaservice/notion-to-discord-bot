@@ -13,12 +13,12 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@cloudflare/vitest-pool-workers": "^0.5.34",
-		"@cloudflare/workers-types": "^4.20250317.0",
+		"@cloudflare/workers-types": "^4.20250404.0",
 		"@notionhq/client": "^2.2.15",
 		"discord-api-types": "^0.37.110",
 		"typescript": "^5.7.2",
 		"vitest": "2.0.5",
-		"wrangler": "^4.1.0"
+		"wrangler": "^4.7.1"
 	},
 	"dependencies": {
 		"hono": "^4.6.13"
