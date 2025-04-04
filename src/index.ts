@@ -75,12 +75,12 @@ app.post("/:discordChannelId", async (c) => {
 		],
 		components: [
 			{
-				type: 1 satisfies ComponentType,
+				type: 1 satisfies ComponentType.ActionRow,
 				components: [
 					{
-						type: 2 satisfies ComponentType,
+						type: 2 satisfies ComponentType.Button,
 						label: "Open in Notion",
-						style: 5 satisfies ButtonStyle,
+						style: 5 satisfies ButtonStyle.Link,
 						url: body.data.url,
 					},
 				],
