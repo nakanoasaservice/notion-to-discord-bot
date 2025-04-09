@@ -2,6 +2,8 @@
 
 A simple bot that forwards Notion database updates to Discord channels via webhooks. When changes are made to your Notion database, the bot automatically sends formatted messages to your specified Discord channels.
 
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fnakanoasaservice%2Fnotion-to-discord-bot)
+
 ## Invitation Link
 
 ```text
