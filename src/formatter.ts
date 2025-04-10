@@ -5,7 +5,7 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 
 type RemoveId<T> = T extends unknown ? Omit<T, "id"> : never;
-type Property = PageObjectResponse["properties"][number];
+type Property = RemoveId<PageObjectResponse["properties"][number]>;
 
 function formatPerson(
 	person: PartialUserObjectResponse | UserObjectResponse,
@@ -28,7 +28,7 @@ function formatDate(
 	return date.start;
 }
 
-export function formatProperty(property: RemoveId<Property>): string {
+export function formatProperty(property: Property): string {
 	switch (property.type) {
 		case "title":
 			return (
