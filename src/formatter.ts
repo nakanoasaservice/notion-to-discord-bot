@@ -10,7 +10,7 @@ type Property = RemoveId<PageObjectResponse["properties"][number]>;
 function formatPerson(
 	person: PartialUserObjectResponse | UserObjectResponse,
 ): string {
-	if ("type" in person) {
+	if ("name" in person) {
 		return person.name ?? person.id;
 	}
 	return person.id;
