@@ -3,7 +3,7 @@
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit",
-		"source.organizeImports": "explicit"
+		"source.organizeImports.biome": "explicit"
 	},
 	"extensions.ignoreRecommendations": false,
 	"cSpell.words": ["notionhq"]
