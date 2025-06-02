@@ -1,6 +1,7 @@
 import type {
 	PageObjectResponse,
 	PartialUserObjectResponse,
+	RichTextItemResponse,
 	UserObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
@@ -28,18 +29,43 @@ function formatDate(
 	return date.start;
 }
 
+function formatRichText(richText: RichTextItemResponse): string {
+	switch (richText.type) {
+		case "text":
+			if (richText.text.link) {
+				return `[${richText.text.content}](${richText.text.link.url})`;
+			}
+			return richText.text.content;
+		case "mention":
+			switch (richText.mention.type) {
+				case "user":
+					return formatPerson(richText.mention.user);
+				case "date":
+					return formatDate(richText.mention.date);
+				case "link_preview":
+					return `[${richText.plain_text}](${richText.mention.link_preview.url})`;
+				case "template_mention":
+					return richText.plain_text;
+				case "page":
+					return `[${richText.plain_text}](https://www.notion.so/${richText.mention.page.id.replaceAll("-", "")})`;
+				case "database":
+					return `[${richText.plain_text}](https://www.notion.so/${richText.mention.database.id.replaceAll("-", "")})`;
+				default:
+					return "[Unsupported Mention Type]";
+			}
+		case "equation":
+			return richText.plain_text;
+		default:
+			return `[Unsupported Rich Text Type: ${JSON.stringify(richText, null, 2)}]`;
+	}
+}
+
 export function formatProperty(property: Property): string {
 	switch (property.type) {
 		case "title":
-			return (
-				property.title.map((title) => title.plain_text).join("") ||
-				"[Empty Title]"
-			);
+			return property.title.map(formatRichText).join("") || "[Empty Title]";
 		case "rich_text":
-			return (
-				property.rich_text.map((text) => text.plain_text).join("") ||
-				"[Empty Text]"
-			);
+			return property.rich_text.map(formatRichText).join("") || "[Empty Text]";
 		case "url":
 			return property.url ?? "[No URL]";
 		case "select":
