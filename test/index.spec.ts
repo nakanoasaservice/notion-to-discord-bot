@@ -1,8 +1,8 @@
 // test/index.spec.ts
 import {
-	SELF,
 	createExecutionContext,
 	env,
+	SELF,
 	waitOnExecutionContext,
 } from "cloudflare:test";
 import { describe, expect, it } from "vitest";
