@@ -1,4 +1,5 @@
 import type {
+	GroupObjectResponse,
 	PageObjectResponse,
 	PartialUserObjectResponse,
 	RichTextItemResponse,
@@ -8,8 +9,10 @@ import type {
 type RemoveId<T> = T extends unknown ? Omit<T, "id"> : never;
 type Property = RemoveId<PageObjectResponse["properties"][number]>;
 
+type DateResponse = Extract<Property, { type: "date" }>["date"];
+
 function formatPerson(
-	person: PartialUserObjectResponse | UserObjectResponse,
+	person: PartialUserObjectResponse | UserObjectResponse | GroupObjectResponse,
 ): string {
 	if ("name" in person) {
 		return person.name ?? person.id;
@@ -17,16 +20,16 @@ function formatPerson(
 	return person.id;
 }
 
-function formatDate(
-	date: { start: string; end: string | null } | null,
-): string {
+function formatDate(date: DateResponse): string {
 	if (!date) return "[No Date]";
 
-	if (date.end) {
-		return `${date.start} - ${date.end}`;
+	const dateStr = date.end ? `${date.start} - ${date.end}` : date.start;
+
+	if (date.time_zone) {
+		return `${dateStr} (${date.time_zone})`;
 	}
 
-	return date.start;
+	return dateStr;
 }
 
 function formatRichText(richText: RichTextItemResponse): string {
@@ -154,6 +157,16 @@ export function formatProperty(property: Property): string {
 				default:
 					return "[Unsupported Rollup Type]";
 			}
+		case "verification":
+			return property.verification
+				? property.verification.state === "unverified"
+					? "🔴 Unverified"
+					: property.verification.state === "expired"
+						? "🟡 Expired"
+						: "🟢 Verified"
+				: `[No Verification]`;
+		case "button":
+			return "[Button]";
 		default:
 			return `[Unsupported Type: ${JSON.stringify(property, null, 2)}]`;
 	}
