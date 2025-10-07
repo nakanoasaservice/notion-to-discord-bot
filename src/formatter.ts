@@ -53,6 +53,10 @@ function formatRichText(richText: RichTextItemResponse): string {
 					return `[${richText.plain_text}](https://www.notion.so/${richText.mention.page.id.replaceAll("-", "")})`;
 				case "database":
 					return `[${richText.plain_text}](https://www.notion.so/${richText.mention.database.id.replaceAll("-", "")})`;
+				case "link_mention":
+					return `[${richText.mention.link_mention.title ?? richText.plain_text}](${richText.mention.link_mention.href})`;
+				case "custom_emoji":
+					return `[${richText.mention.custom_emoji.name}](${richText.mention.custom_emoji.url})`;
 				default:
 					return "[Unsupported Mention Type]";
 			}
