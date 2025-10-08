@@ -8,7 +8,8 @@
 	},
 	"extensions.ignoreRecommendations": false,
 	"files.associations": {
-		".dev.vars": "dotenv"
+		".dev.vars": "dotenv",
+		".dev.vars.example": "dotenv"
 	},
 	"cSpell.words": ["notionhq"]
 }
