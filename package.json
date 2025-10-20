@@ -11,16 +11,16 @@
 		"check": "biome check --write"
 	},
 	"dependencies": {
-		"hono": "^4.9.11"
+		"hono": "^4.10.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.2.5",
-		"@cloudflare/vitest-pool-workers": "^0.9.12",
+		"@biomejs/biome": "^2.2.6",
+		"@cloudflare/vitest-pool-workers": "^0.9.13",
 		"@cloudflare/workers-types": "^4.20251011.0",
-		"@notionhq/client": "^5.1.0",
-		"discord-api-types": "^0.38.29",
+		"@notionhq/client": "^5.3.0",
+		"discord-api-types": "^0.38.30",
 		"typescript": "^5.9.3",
 		"vitest": "2.1.9",
-		"wrangler": "^4.42.2"
+		"wrangler": "^4.43.0"
 	}
 }
