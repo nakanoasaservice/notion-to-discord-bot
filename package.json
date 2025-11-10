@@ -14,13 +14,13 @@
 		"hono": "^4.10.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.3.2",
-		"@cloudflare/vitest-pool-workers": "^0.10.3",
-		"@cloudflare/workers-types": "^4.20251014.0",
-		"@notionhq/client": "^5.3.0",
-		"discord-api-types": "^0.38.31",
+		"@biomejs/biome": "^2.3.4",
+		"@cloudflare/vitest-pool-workers": "^0.10.5",
+		"@cloudflare/workers-types": "^4.20251109.0",
+		"@notionhq/client": "^5.4.0",
+		"discord-api-types": "^0.38.33",
 		"typescript": "^5.9.3",
 		"vitest": "2.1.9",
-		"wrangler": "^4.45.3"
+		"wrangler": "^4.46.0"
 	}
 }
