@@ -142,7 +142,10 @@ export function formatProperty(property: Property): string {
 							case "external":
 								return `[${file.name}](${file.external.url})`;
 							default:
-								return file.name;
+								if ("name" in file) {
+									return (file as { name: string }).name;
+								}
+								return "[Unsupported File Type]";
 						}
 					})
 					.join(", ") || "[No Files]"

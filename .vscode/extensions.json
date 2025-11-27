@@ -1,7 +1,7 @@
 {
 	"recommendations": [
-		"streetsidesoftware.code-spell-checker",
 		"biomejs.biome",
+		"streetsidesoftware.code-spell-checker",
 		"tamasfe.even-better-toml"
 	]
 }
