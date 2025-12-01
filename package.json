@@ -13,15 +13,15 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"hono": "^4.10.6"
+		"hono": "^4.10.7"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.3.7",
-		"@cloudflare/vitest-pool-workers": "^0.10.10",
+		"@biomejs/biome": "^2.3.8",
+		"@cloudflare/vitest-pool-workers": "^0.10.11",
 		"@notionhq/client": "^5.4.0",
-		"discord-api-types": "^0.38.34",
+		"discord-api-types": "^0.38.35",
 		"typescript": "^5.9.3",
 		"vitest": "2.1.9",
-		"wrangler": "^4.50.0"
+		"wrangler": "^4.51.0"
 	}
 }
