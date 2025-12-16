@@ -16,12 +16,12 @@
 		"hono": "^4.11.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.3.8",
+		"@biomejs/biome": "^2.3.9",
 		"@cloudflare/vitest-pool-workers": "^0.10.15",
-		"@notionhq/client": "^5.4.0",
+		"@notionhq/client": "^5.6.0",
 		"discord-api-types": "^0.38.37",
 		"typescript": "^5.9.3",
 		"vitest": "2.1.9",
-		"wrangler": "^4.54.0"
+		"wrangler": "^4.55.0"
 	}
 }
