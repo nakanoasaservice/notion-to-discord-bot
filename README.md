@@ -68,7 +68,7 @@ Construct your Webhook URL using one of the formats below.
 
 **For Public Instance Users:**
 ```
-https://notion-to-discord-bot.yoshinani.workers.dev/{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}
+https://notion-to-discord-bot.naas.workers.dev/{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}
 ```
 
 **For Self-Hosted Users:**
@@ -82,7 +82,7 @@ https://your-worker-name.your-subdomain.workers.dev/{DISCORD_CHANNEL_ID}?title={
 
 **Example:**
 ```
-https://notion-to-discord-bot.yoshinani.workers.dev/1234567890123456789?title=Task Updates
+https://notion-to-discord-bot.naas.workers.dev/1234567890123456789?title=Task Updates
 ```
 
 **Where to set this URL:**
