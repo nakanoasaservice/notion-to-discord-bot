@@ -7,7 +7,7 @@ export default function App() {
 	const [copied, setCopied] = useState(false);
 
 	const isValid = useMemo(
-		() => channelId === "" || /^\d{18,19}$/.test(channelId),
+		() => channelId === "" || /^\d{17,19}$/.test(channelId),
 		[channelId],
 	);
 
@@ -300,7 +300,7 @@ export default function App() {
 							value={
 								isValid
 									? generatedUrl
-									: "Please enter a valid 18-19 digit Channel ID"
+									: "Please enter a valid 17-19 digit Channel ID"
 							}
 							onClick={handleCopy}
 							style={{
