@@ -174,6 +174,17 @@ export function formatProperty(property: Property): string {
 				: `[No Verification]`;
 		case "button":
 			return "[Button]";
+		case "place":
+			return property.place
+				? property.place.name
+					? property.place.address == null ||
+						property.place.name === property.place.address
+						? property.place.name
+						: `${property.place.name}\n${property.place.address}`
+					: property.place.address
+						? property.place.address
+						: `(${property.place.lat}, ${property.place.lon})`
+				: "[No Place]";
 		default:
 			return `[Unsupported Type: ${JSON.stringify(property, null, 2)}]`;
 	}
