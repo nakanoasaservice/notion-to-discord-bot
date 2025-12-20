@@ -2,7 +2,8 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "notion-to-discord-bot",
 	"main": "src/index.ts",
-	"compatibility_date": "2025-11-09",
+	"compatibility_date": "2025-12-17",
+	"compatibility_flags": [],
 
 	// Workers Logs
 	// Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
