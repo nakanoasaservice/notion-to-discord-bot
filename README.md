@@ -23,7 +23,8 @@ Choose the method that best fits your needs.
 Use our pre-deployed worker without any setup.
 
 1. **Invite the Bot**: [Click here to invite the bot to your Discord server](https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot).
-2. **Skip Deployment**: Go directly to the [Configuration](#%EF%B8%8F-configuration) section below.
+2. **Generate URL**: Visit [notion-to-discord-bot.naas.workers.dev](https://notion-to-discord-bot.naas.workers.dev) to generate your webhook URL.
+3. **Configure Notion**: Use the generated URL in your Notion database settings.
 
 ### Path B: Self-Hosting
 Host your own instance on Cloudflare Workers for full control and custom domains.
@@ -64,6 +65,11 @@ Follow these steps to connect Notion to Discord.
 
 ### 2. Configure Notion Webhook
 
+**✨ Recommended: Webhook URL Generator**
+Visit [notion-to-discord-bot.naas.workers.dev](https://notion-to-discord-bot.naas.workers.dev) to easily generate your webhook URL.
+
+**Manual Construction:**
+
 Construct your Webhook URL using one of the formats below.
 
 **For Public Instance Users:**
@@ -82,7 +88,7 @@ https://your-worker-name.your-subdomain.workers.dev/{DISCORD_CHANNEL_ID}?title={
 
 **Example:**
 ```
-https://notion-to-discord-bot.naas.workers.dev/1234567890123456789?title=Task Updates
+https://notion-to-discord-bot.naas.workers.dev/1234567890123456789?title=Task%20Updates
 ```
 
 **Where to set this URL:**
