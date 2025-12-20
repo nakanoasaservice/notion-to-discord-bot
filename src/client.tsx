@@ -311,7 +311,7 @@ export default function App() {
 								backgroundColor: isValid ? "#e8f5e9" : "#ffebee",
 								color: isValid ? "#1b5e20" : "#c62828",
 								fontFamily: "monospace",
-								fontSize: "0.9rem",
+								fontSize: "0.85rem",
 								cursor: channelId && isValid ? "pointer" : "not-allowed",
 							}}
 						/>
@@ -348,26 +348,6 @@ export default function App() {
 					</small>
 				</div>
 			</section>
-
-			<footer
-				style={{
-					marginTop: "4rem",
-					textAlign: "center",
-					color: "#999",
-					fontSize: "0.9rem",
-				}}
-			>
-				<p>
-					<a
-						href="https://github.com/nakanoasaservice/notion-to-discord-bot"
-						target="_blank"
-						rel="noreferrer"
-						style={{ color: "#999" }}
-					>
-						GitHub Repository
-					</a>
-				</p>
-			</footer>
 		</div>
 	);
 }
