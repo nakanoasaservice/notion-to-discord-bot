@@ -117,256 +117,263 @@ export default function App() {
 				</p>
 			</header>
 
-			<section style={{ marginBottom: "3rem" }}>
-				<h2 style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}>
-					How it works
-				</h2>
-				<p>
-					This bot acts as a bridge between Notion and Discord. When you
-					configure a webhook in Notion (e.g., from a database automation), it
-					sends data to this worker, which formats it and posts it to your
-					specified Discord channel.
-				</p>
-			</section>
+			<main>
+				<section style={{ marginBottom: "3rem" }}>
+					<h2
+						style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}
+					>
+						How it works
+					</h2>
+					<p>
+						This bot acts as a bridge between Notion and Discord. When you
+						configure a webhook in Notion (e.g., from a database automation), it
+						sends data to this worker, which formats it and posts it to your
+						specified Discord channel.
+					</p>
+				</section>
 
-			<section style={{ marginBottom: "3rem" }}>
-				<h2 style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}>
-					Setup Guide
-				</h2>
-				<ol style={{ paddingLeft: "1.5rem" }}>
-					<li style={{ marginBottom: "0.5rem" }}>
-						<strong>Invite the Bot:</strong>{" "}
-						<a
-							href="https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot"
-							target="_blank"
-							rel="noreferrer"
-							style={{ color: "#0066cc", textDecoration: "none" }}
-						>
-							Click here to invite the bot to your Discord server
-						</a>
-						.
-					</li>
-					<li style={{ marginBottom: "0.5rem" }}>
-						<strong>Get Channel ID:</strong> Enable Developer Mode in Discord,
-						right-click your desired channel, and select "Copy Channel ID".
-					</li>
-					<li style={{ marginBottom: "0.5rem" }}>
-						<strong>Generate Webhook URL:</strong> Use the form below to create
-						your webhook URL.
-					</li>
-					<li style={{ marginBottom: "0.5rem" }}>
-						<strong>Configure Notion:</strong> In your Notion database, go to
-						Settings → Automations → New action → Send webhook, and paste the
-						generated URL.
-					</li>
-				</ol>
-			</section>
+				<section style={{ marginBottom: "3rem" }}>
+					<h2
+						style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}
+					>
+						Setup Guide
+					</h2>
+					<ol style={{ paddingLeft: "1.5rem" }}>
+						<li style={{ marginBottom: "0.5rem" }}>
+							<strong>Invite the Bot:</strong>{" "}
+							<a
+								href="https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot"
+								target="_blank"
+								rel="noreferrer"
+								style={{ color: "#0066cc", textDecoration: "none" }}
+							>
+								Click here to invite the bot to your Discord server
+							</a>
+							.
+						</li>
+						<li style={{ marginBottom: "0.5rem" }}>
+							<strong>Get Channel ID:</strong> Enable Developer Mode in Discord,
+							right-click your desired channel, and select "Copy Channel ID".
+						</li>
+						<li style={{ marginBottom: "0.5rem" }}>
+							<strong>Generate Webhook URL:</strong> Use the form below to
+							create your webhook URL.
+						</li>
+						<li style={{ marginBottom: "0.5rem" }}>
+							<strong>Configure Notion:</strong> In your Notion database, go to
+							Settings → Automations → New action → Send webhook, and paste the
+							generated URL.
+						</li>
+					</ol>
+				</section>
 
-			<section
-				style={{
-					backgroundColor: "#f7f7f5",
-					padding: "2rem",
-					borderRadius: "8px",
-					border: "1px solid #e0e0e0",
-				}}
-			>
-				<h2
+				<section
 					style={{
-						marginTop: 0,
-						borderBottom: "1px solid #e0e0e0",
-						paddingBottom: "0.5rem",
-						marginBottom: "1.5rem",
+						backgroundColor: "#f7f7f5",
+						padding: "2rem",
+						borderRadius: "8px",
+						border: "1px solid #e0e0e0",
 					}}
 				>
-					Webhook URL Generator
-				</h2>
-
-				<div
-					style={{
-						display: "flex",
-						gap: "1.5rem",
-						flexWrap: "wrap",
-						marginBottom: "1.5rem",
-					}}
-				>
-					<div style={{ flex: "1 1 300px" }}>
-						<label
-							htmlFor="channelId"
-							style={{
-								display: "block",
-								marginBottom: "0.5rem",
-								fontWeight: "bold",
-							}}
-						>
-							Discord Channel ID <span style={{ color: "red" }}>*</span>
-						</label>
-						<input
-							type="text"
-							id="channelId"
-							placeholder="e.g. 1234567890123456789"
-							value={channelId}
-							onInput={(e) =>
-								setChannelId((e.target as HTMLInputElement).value)
-							}
-							style={{
-								width: "100%",
-								padding: "0.75rem",
-								borderRadius: "4px",
-								border: `1px solid ${isValid ? "#ccc" : "#d32f2f"}`,
-								fontSize: "1rem",
-								boxSizing: "border-box",
-							}}
-						/>
-						<small
-							style={{
-								color: "#666",
-								display: "block",
-								marginTop: "0.25rem",
-							}}
-						>
-							Right-click channel → "Copy Channel ID"
-						</small>
-					</div>
-
-					<div style={{ flex: "1 1 300px" }}>
-						<label
-							htmlFor="title"
-							style={{
-								display: "block",
-								marginBottom: "0.5rem",
-								fontWeight: "bold",
-							}}
-						>
-							Custom Title (Optional)
-						</label>
-						<textarea
-							id="title"
-							placeholder="e.g. Task Updated"
-							value={title}
-							onInput={(e) => {
-								const target = e.target as HTMLTextAreaElement;
-								setTitle(target.value);
-								target.style.height = "auto";
-								target.style.height = `${target.scrollHeight}px`;
-							}}
-							rows={1}
-							style={{
-								width: "100%",
-								padding: "0.75rem",
-								borderRadius: "4px",
-								border: "1px solid #ccc",
-								fontSize: "1rem",
-								boxSizing: "border-box",
-								resize: "none",
-								overflow: "hidden",
-								minHeight: "42px",
-								fontFamily: "inherit",
-							}}
-						/>
-						<small
-							style={{
-								color: "#666",
-								display: "block",
-								marginTop: "0.25rem",
-							}}
-						>
-							A title to display at the top of the Discord embed.
-						</small>
-					</div>
-				</div>
-
-				<div style={{ marginTop: "2rem" }}>
-					<label
-						htmlFor="generatedUrl"
+					<h2
 						style={{
-							display: "block",
-							marginBottom: "0.5rem",
-							fontWeight: "bold",
-							color: isValid ? "#2e7d32" : "#d32f2f",
+							marginTop: 0,
+							borderBottom: "1px solid #e0e0e0",
+							paddingBottom: "0.5rem",
+							marginBottom: "1.5rem",
 						}}
 					>
-						{isValid ? "Your Webhook URL" : "Invalid Channel ID"}
-					</label>
+						Webhook URL Generator
+					</h2>
+
 					<div
 						style={{
 							display: "flex",
-							gap: "0.5rem",
+							gap: "1.5rem",
+							flexWrap: "wrap",
+							marginBottom: "1.5rem",
 						}}
 					>
-						<input
-							type="text"
-							id="generatedUrl"
-							readOnly
-							value={
-								isValid
-									? generatedUrl
-									: "Please enter a valid 17-19 digit Channel ID"
-							}
-							onClick={handleCopy}
+						<div style={{ flex: "1 1 300px" }}>
+							<label
+								htmlFor="channelId"
+								style={{
+									display: "block",
+									marginBottom: "0.5rem",
+									fontWeight: "bold",
+								}}
+							>
+								Discord Channel ID <span style={{ color: "red" }}>*</span>
+							</label>
+							<input
+								type="text"
+								id="channelId"
+								placeholder="e.g. 1234567890123456789"
+								value={channelId}
+								onInput={(e) =>
+									setChannelId((e.target as HTMLInputElement).value)
+								}
+								style={{
+									width: "100%",
+									padding: "0.75rem",
+									borderRadius: "4px",
+									border: `1px solid ${isValid ? "#ccc" : "#d32f2f"}`,
+									fontSize: "1rem",
+									boxSizing: "border-box",
+								}}
+							/>
+							<small
+								style={{
+									color: "#666",
+									display: "block",
+									marginTop: "0.25rem",
+								}}
+							>
+								Right-click channel → "Copy Channel ID"
+							</small>
+						</div>
+
+						<div style={{ flex: "1 1 300px" }}>
+							<label
+								htmlFor="title"
+								style={{
+									display: "block",
+									marginBottom: "0.5rem",
+									fontWeight: "bold",
+								}}
+							>
+								Custom Title (Optional)
+							</label>
+							<textarea
+								id="title"
+								placeholder="e.g. Task Updated"
+								value={title}
+								onInput={(e) => {
+									const target = e.target as HTMLTextAreaElement;
+									setTitle(target.value);
+									target.style.height = "auto";
+									target.style.height = `${target.scrollHeight}px`;
+								}}
+								rows={1}
+								style={{
+									width: "100%",
+									padding: "0.75rem",
+									borderRadius: "4px",
+									border: "1px solid #ccc",
+									fontSize: "1rem",
+									boxSizing: "border-box",
+									resize: "none",
+									overflow: "hidden",
+									minHeight: "42px",
+									fontFamily: "inherit",
+								}}
+							/>
+							<small
+								style={{
+									color: "#666",
+									display: "block",
+									marginTop: "0.25rem",
+								}}
+							>
+								A title to display at the top of the Discord embed.
+							</small>
+						</div>
+					</div>
+
+					<div style={{ marginTop: "2rem" }}>
+						<label
+							htmlFor="generatedUrl"
 							style={{
-								flex: 1,
-								padding: "0.75rem",
-								borderRadius: "4px",
-								border: `1px solid ${isValid ? "#2e7d32" : "#d32f2f"}`,
-								backgroundColor: isValid ? "#e8f5e9" : "#ffebee",
-								color: isValid ? "#1b5e20" : "#c62828",
-								fontFamily: "monospace",
-								fontSize: "0.85rem",
-								cursor: channelId && isValid ? "pointer" : "not-allowed",
+								display: "block",
+								marginBottom: "0.5rem",
+								fontWeight: "bold",
+								color: isValid ? "#2e7d32" : "#d32f2f",
 							}}
-						/>
-						<button
-							type="button"
-							onClick={handleCopy}
-							disabled={!channelId || !isValid}
-							style={{
-								padding: "0.75rem",
-								backgroundColor: !channelId || !isValid ? "#a5d6a7" : "#2e7d32",
-								color: "white",
-								border: "none",
-								borderRadius: "4px",
-								cursor: !channelId || !isValid ? "not-allowed" : "pointer",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								minWidth: "44px",
-								width: "44px",
-							}}
-							aria-label="Copy URL"
 						>
-							<svg
-								width="20"
-								height="20"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
+							{isValid ? "Your Webhook URL" : "Invalid Channel ID"}
+						</label>
+						<div
+							style={{
+								display: "flex",
+								gap: "0.5rem",
+							}}
+						>
+							<input
+								type="text"
+								id="generatedUrl"
+								readOnly
+								value={
+									isValid
+										? generatedUrl
+										: "Please enter a valid 17-19 digit Channel ID"
+								}
+								onClick={handleCopy}
+								style={{
+									flex: 1,
+									padding: "0.75rem",
+									borderRadius: "4px",
+									border: `1px solid ${isValid ? "#2e7d32" : "#d32f2f"}`,
+									backgroundColor: isValid ? "#e8f5e9" : "#ffebee",
+									color: isValid ? "#1b5e20" : "#c62828",
+									fontFamily: "monospace",
+									fontSize: "0.85rem",
+									cursor: channelId && isValid ? "pointer" : "not-allowed",
+								}}
+							/>
+							<button
+								type="button"
+								onClick={handleCopy}
+								disabled={!channelId || !isValid}
+								style={{
+									padding: "0.75rem",
+									backgroundColor:
+										!channelId || !isValid ? "#a5d6a7" : "#2e7d32",
+									color: "white",
+									border: "none",
+									borderRadius: "4px",
+									cursor: !channelId || !isValid ? "not-allowed" : "pointer",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									minWidth: "44px",
+									width: "44px",
+								}}
 								aria-label="Copy URL"
 							>
-								<title>Copy URL</title>
-								<rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-							</svg>
-						</button>
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									aria-label="Copy URL"
+								>
+									<title>Copy URL</title>
+									<rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+									<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+								</svg>
+							</button>
+						</div>
+						<small
+							style={{
+								color: "#2e7d32",
+								display: "block",
+								marginTop: "0.5rem",
+								fontWeight: "bold",
+								visibility: copied ? "visible" : "hidden",
+								opacity: copied ? 1 : 0,
+								transition: "opacity 0.2s ease-in-out",
+								minHeight: "1.2rem",
+							}}
+						>
+							Copied!
+						</small>
 					</div>
-					<small
-						style={{
-							color: "#2e7d32",
-							display: "block",
-							marginTop: "0.5rem",
-							fontWeight: "bold",
-							visibility: copied ? "visible" : "hidden",
-							opacity: copied ? 1 : 0,
-							transition: "opacity 0.2s ease-in-out",
-							minHeight: "1.2rem",
-						}}
-					>
-						Copied!
-					</small>
-				</div>
-			</section>
+				</section>
+			</main>
 		</div>
 	);
 }
