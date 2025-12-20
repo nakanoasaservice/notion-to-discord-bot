@@ -1,30 +1,68 @@
 // test/index.spec.ts
-import {
-	createExecutionContext,
-	env,
-	SELF,
-	waitOnExecutionContext,
-} from "cloudflare:test";
-import { describe, expect, it } from "vitest";
-import worker from "../src/index";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import app from "../src/index";
 
-// For now, you'll need to do something like this to get a correctly-typed
-// `Request` to pass to `worker.fetch()`.
-const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
+describe("Notion to Discord Bot worker", () => {
+	let mockFetch: ReturnType<typeof vi.fn>;
 
-describe("Hello World worker", () => {
-	it("responds with Hello World! (unit style)", async () => {
-		const request = new IncomingRequest("http://example.com");
-		// Create an empty context to pass to `worker.fetch()`.
-		const ctx = createExecutionContext();
-		const response = await worker.fetch(request, env, ctx);
-		// Wait for all `Promise`s passed to `ctx.waitUntil()` to settle before running test assertions
-		await waitOnExecutionContext(ctx);
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
+	beforeEach(() => {
+		mockFetch = vi.fn().mockResolvedValue({
+			ok: true,
+			status: 200,
+			text: async () => "",
+		});
+		global.fetch = mockFetch;
 	});
 
-	it("responds with Hello World! (integration style)", async () => {
-		const response = await SELF.fetch("https://example.com");
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
+	it("responds with 204 No Content", async () => {
+		const channelId = "1234567890123456789";
+		const response = await app.request(
+			`/${channelId}`,
+			{
+				method: "POST",
+				body: JSON.stringify({
+					data: {
+						url: "https://example.com",
+						properties: {
+							name: {
+								type: "title",
+								title: [
+									{
+										type: "text",
+										text: { content: "Test", link: null },
+										annotations: {
+											bold: false,
+											italic: false,
+											strikethrough: false,
+											underline: false,
+											code: false,
+											color: "default",
+										},
+										plain_text: "Test",
+										href: null,
+									},
+								],
+							},
+						},
+					},
+				}),
+			},
+			{
+				DISCORD_BOT_TOKEN: "dummy-token",
+			},
+		);
+
+		expect(response.status).toBe(204);
+		expect(mockFetch).toHaveBeenCalledTimes(1);
+		expect(mockFetch).toHaveBeenCalledWith(
+			`https://discord.com/api/v10/channels/${channelId}/messages`,
+			expect.objectContaining({
+				method: "POST",
+				headers: expect.objectContaining({
+					Authorization: "Bot dummy-token",
+					"Content-Type": "application/json",
+				}),
+			}),
+		);
 	});
 });
