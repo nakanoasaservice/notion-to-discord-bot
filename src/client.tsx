@@ -156,7 +156,7 @@ export default function App() {
 					</li>
 					<li style={{ marginBottom: "0.5rem" }}>
 						<strong>Configure Notion:</strong> In your Notion database, go to
-						Settings → Connections → Webhooks → Add webhook, and paste the
+						Settings → Automations → New action → Send webhook, and paste the
 						generated URL.
 					</li>
 				</ol>
