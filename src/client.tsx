@@ -1,32 +1,26 @@
-import { useEffect, useState } from "hono/jsx";
+import { useMemo, useState } from "hono/jsx";
 import { render } from "hono/jsx/dom";
 
 export default function App() {
 	const [channelId, setChannelId] = useState("");
 	const [title, setTitle] = useState("");
-	const [generatedUrl, setGeneratedUrl] = useState("");
-	const [origin, setOrigin] = useState("");
-	const [isValid, setIsValid] = useState(true);
 	const [copied, setCopied] = useState(false);
 
-	useEffect(() => {
-		setOrigin(window.location.origin);
-	}, []);
+	const isValid = useMemo(
+		() => channelId === "" || /^\d{18,19}$/.test(channelId),
+		[channelId],
+	);
 
-	useEffect(() => {
-		// Validation: Check if channelId contains only digits and is 18-19 characters long
-		// Allow empty string to avoid error on initial load
-		const isIdValid = channelId === "" || /^\d{18,19}$/.test(channelId);
-		setIsValid(isIdValid);
-
+	const generatedUrl = useMemo(() => {
+		const origin = typeof window !== "undefined" ? window.location.origin : "";
 		const baseUrl = origin || "https://your-worker.workers.dev";
 		const idPart = channelId || "{DISCORD_CHANNEL_ID}";
 		let url = `${baseUrl}/${idPart}`;
 		if (title) {
 			url += `?title=${encodeURIComponent(title)}`;
 		}
-		setGeneratedUrl(url);
-	}, [channelId, title, origin]);
+		return url;
+	}, [channelId, title]);
 
 	const handleCopy = () => {
 		if (channelId && isValid && generatedUrl) {
