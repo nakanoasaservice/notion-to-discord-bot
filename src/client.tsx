@@ -419,7 +419,6 @@ function App() {
 	);
 }
 
-const root = document.getElementById("root");
-if (root) {
-	render(<App />, root);
-}
+// biome-ignore lint/style/noNonNullAssertion: root is guaranteed to be in the document
+const root = document.getElementById("root")!;
+render(<App />, root);
