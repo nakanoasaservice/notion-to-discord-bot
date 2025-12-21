@@ -326,28 +326,37 @@ export default function App() {
 								gap: "0.5rem",
 							}}
 						>
-							<input
-								type="text"
-								id="generatedUrl"
-								readOnly
-								value={
-									isValid
-										? generatedUrl
-										: "Please enter a valid 17-19 digit Channel ID"
-								}
+							<button
+								type="button"
 								onClick={copyToClipboard}
+								disabled={!channelId || !isValid}
+								aria-label="Copy Webhook URL"
 								style={{
-									flex: 1,
-									padding: "0.75rem",
-									borderRadius: "4px",
-									border: `1px solid ${isValid ? "#2e7d32" : "#d32f2f"}`,
-									backgroundColor: isValid ? "#e8f5e9" : "#ffebee",
-									color: isValid ? "#1b5e20" : "#c62828",
+									flex: "1 1 0",
+									minWidth: "0",
+									display: "flex",
+									alignItems: "center",
+									padding: "0.75rem 0.875rem",
+									backgroundColor: "#fff",
+									borderRadius: "6px",
+									fontSize: "0.9rem",
+									wordBreak: "break-all",
+									border: "1px solid #ddd",
 									fontFamily: "monospace",
-									fontSize: "0.85rem",
+									minHeight: "2.75rem",
+									color: channelId && isValid ? "#333" : "#999",
 									cursor: channelId && isValid ? "pointer" : "not-allowed",
+									boxSizing: "border-box",
+									textAlign: "left",
+									appearance: "none",
 								}}
-							/>
+							>
+								{channelId && isValid
+									? generatedUrl
+									: channelId && !isValid
+										? "Please enter a valid 17-19 digit Channel ID"
+										: "Please enter a Channel ID"}
+							</button>
 							<button
 								type="button"
 								onClick={copyToClipboard}
