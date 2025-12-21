@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "hono/jsx";
 import { render } from "hono/jsx/dom";
 
-export default function App() {
+function App() {
 	const [channelId, setChannelId] = useState("");
 	const [title, setTitle] = useState("");
 	const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
