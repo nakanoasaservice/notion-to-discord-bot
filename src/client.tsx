@@ -1,10 +1,12 @@
-import { useMemo, useState } from "hono/jsx";
+import { useCallback, useEffect, useMemo, useState } from "hono/jsx";
 import { render } from "hono/jsx/dom";
 
 export default function App() {
 	const [channelId, setChannelId] = useState("");
 	const [title, setTitle] = useState("");
-	const [copied, setCopied] = useState(false);
+	const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
+		"idle",
+	);
 
 	const isValid = useMemo(
 		() => channelId === "" || /^\d{17,19}$/.test(channelId),
@@ -22,13 +24,28 @@ export default function App() {
 		return url;
 	}, [channelId, title]);
 
-	const handleCopy = () => {
-		if (channelId && isValid && generatedUrl) {
-			navigator.clipboard.writeText(generatedUrl);
-			setCopied(true);
-			setTimeout(() => setCopied(false), 2000);
+	const copyToClipboard = useCallback(async () => {
+		if (!channelId || !isValid || !generatedUrl) return;
+		try {
+			await navigator.clipboard.writeText(generatedUrl);
+			setCopyState("copied");
+		} catch (err) {
+			console.error("Failed to copy:", err);
+			setCopyState("failed");
 		}
-	};
+	}, [channelId, isValid, generatedUrl]);
+
+	// Reset copy state after delay
+	useEffect(() => {
+		if (copyState === "idle") return;
+
+		const timeoutId = window.setTimeout(
+			() => setCopyState("idle"),
+			copyState === "copied" ? 1500 : 2000,
+		);
+
+		return () => window.clearTimeout(timeoutId);
+	}, [copyState]);
 
 	return (
 		<div
@@ -206,7 +223,8 @@ export default function App() {
 								Discord Channel ID <span style={{ color: "red" }}>*</span>
 							</label>
 							<input
-								type="text"
+								type="number"
+								inputMode="numeric"
 								id="channelId"
 								placeholder="e.g. 1234567890123456789"
 								value={channelId}
@@ -246,15 +264,24 @@ export default function App() {
 							</label>
 							<textarea
 								id="title"
-								placeholder="e.g. Task Updated"
-								value={title}
-								onInput={(e) => {
-									const target = e.target as HTMLTextAreaElement;
-									setTitle(target.value);
-									target.style.height = "auto";
-									target.style.height = `${target.scrollHeight}px`;
-								}}
 								rows={1}
+								value={title}
+								onKeyDown={(e) => {
+									if (e.key === "Enter") {
+										e.preventDefault();
+									}
+								}}
+								onInput={(e) => {
+									const target = e.currentTarget as HTMLTextAreaElement;
+									if (target) {
+										const valueWithoutNewlines = target.value.replace(
+											/\n/g,
+											"",
+										);
+										setTitle(valueWithoutNewlines);
+									}
+								}}
+								placeholder="e.g. Task Updated"
 								style={{
 									width: "100%",
 									padding: "0.75rem",
@@ -263,9 +290,10 @@ export default function App() {
 									fontSize: "1rem",
 									boxSizing: "border-box",
 									resize: "none",
-									overflow: "hidden",
-									minHeight: "42px",
-									fontFamily: "inherit",
+									overflowWrap: "break-word",
+									wordBreak: "break-word",
+									whiteSpace: "pre-wrap",
+									fieldSizing: "content",
 								}}
 							/>
 							<small
@@ -307,7 +335,7 @@ export default function App() {
 										? generatedUrl
 										: "Please enter a valid 17-19 digit Channel ID"
 								}
-								onClick={handleCopy}
+								onClick={copyToClipboard}
 								style={{
 									flex: 1,
 									padding: "0.75rem",
@@ -322,7 +350,7 @@ export default function App() {
 							/>
 							<button
 								type="button"
-								onClick={handleCopy}
+								onClick={copyToClipboard}
 								disabled={!channelId || !isValid}
 								style={{
 									padding: "0.75rem",
@@ -359,17 +387,21 @@ export default function App() {
 						</div>
 						<small
 							style={{
-								color: "#2e7d32",
+								color: copyState === "failed" ? "#d32f2f" : "#2e7d32",
 								display: "block",
 								marginTop: "0.5rem",
 								fontWeight: "bold",
-								visibility: copied ? "visible" : "hidden",
-								opacity: copied ? 1 : 0,
+								visibility: copyState !== "idle" ? "visible" : "hidden",
+								opacity: copyState !== "idle" ? 1 : 0,
 								transition: "opacity 0.2s ease-in-out",
 								minHeight: "1.2rem",
 							}}
 						>
-							Copied!
+							{copyState === "copied"
+								? "Copied!"
+								: copyState === "failed"
+									? "Failed to copy"
+									: ""}
 						</small>
 					</div>
 				</section>
