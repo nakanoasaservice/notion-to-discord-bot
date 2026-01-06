@@ -1,9 +1,38 @@
 import { useCallback, useEffect, useMemo, useState } from "hono/jsx";
 import { render } from "hono/jsx/dom";
 
+function getChannelIdFromUrl(): string {
+	const pathname = window.location.pathname;
+	const pathChannelId = pathname.replace(/^\//, "").split("/")[0] || "";
+	return pathChannelId;
+}
+
+function getTitleFromUrl(): string {
+	const searchParams = new URLSearchParams(window.location.search);
+	return searchParams.get("title") || "";
+}
+
+// Update URL based on form values
+function updateUrl(channelId: string, title: string) {
+	if (typeof window === "undefined") return;
+
+	const pathChannelId = channelId || "{DISCORD_CHANNEL_ID}";
+	const newPath = `/${pathChannelId}`;
+	const newSearch = title ? `?title=${encodeURIComponent(title)}` : "";
+
+	const newUrl = `${newPath}${newSearch}`;
+
+	// Don't update if the URL is the same
+	if (window.location.pathname + window.location.search === newUrl) {
+		return;
+	}
+
+	window.history.replaceState(null, "", newUrl);
+}
+
 function App() {
-	const [channelId, setChannelId] = useState("");
-	const [title, setTitle] = useState("");
+	const [channelId, setChannelId] = useState(() => getChannelIdFromUrl());
+	const [title, setTitle] = useState(() => getTitleFromUrl());
 	const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
 		"idle",
 	);
@@ -34,6 +63,22 @@ function App() {
 			setCopyState("failed");
 		}
 	}, [channelId, isValid, generatedUrl]);
+
+	// Update URL when form values change
+	useEffect(() => {
+		updateUrl(channelId, title);
+	}, [channelId, title]);
+
+	// Listen to popstate event to detect URL changes (browser back/forward)
+	useEffect(() => {
+		const handlePopState = () => {
+			setChannelId(getChannelIdFromUrl());
+			setTitle(getTitleFromUrl());
+		};
+
+		window.addEventListener("popstate", handlePopState);
+		return () => window.removeEventListener("popstate", handlePopState);
+	}, []);
 
 	// Reset copy state after delay
 	useEffect(() => {
