@@ -16,8 +16,7 @@ function getTitleFromUrl(): string {
 function updateUrl(channelId: string, title: string) {
 	if (typeof window === "undefined") return;
 
-	const pathChannelId = channelId || "{DISCORD_CHANNEL_ID}";
-	const newPath = `/${pathChannelId}`;
+	const newPath = `/${channelId}`;
 	const newSearch = title ? `?title=${encodeURIComponent(title)}` : "";
 
 	const newUrl = `${newPath}${newSearch}`;
