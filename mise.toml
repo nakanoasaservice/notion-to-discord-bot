@@ -1,3 +1,2 @@
 [tools]
-pnpm = "10"
-node = "24"
+bun = "1"

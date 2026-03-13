@@ -6,7 +6,6 @@
 		"source.fixAll": "explicit",
 		"source.organizeImports.biome": "explicit"
 	},
-	"extensions.ignoreRecommendations": false,
 	"files.associations": {
 		".dev.vars": "dotenv",
 		".dev.vars.example": "dotenv"
