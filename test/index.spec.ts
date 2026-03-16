@@ -11,7 +11,7 @@ describe("Notion to Discord Bot worker", () => {
 			status: 200,
 			text: async () => "",
 		});
-		global.fetch = mockFetch;
+		global.fetch = mockFetch as unknown as typeof global.fetch;
 	});
 
 	it("responds with 204 No Content", async () => {
