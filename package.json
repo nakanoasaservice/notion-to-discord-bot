@@ -26,15 +26,15 @@
 		"hono": "^4.12.8"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.7",
-		"@cloudflare/vite-plugin": "^1.28.0",
-		"@cloudflare/vitest-pool-workers": "^0.13.1",
-		"@notionhq/client": "^5.13.0",
+		"@biomejs/biome": "^2.4.8",
+		"@cloudflare/vite-plugin": "^1.30.0",
+		"@cloudflare/vitest-pool-workers": "^0.13.3",
+		"@notionhq/client": "^5.14.0",
 		"discord-api-types": "^0.38.41",
 		"typescript": "^5.9.3",
-		"vite": "^8.0.0",
+		"vite": "^8.0.1",
 		"vitest": "^4.1.0",
-		"wrangler": "^4.74.0"
+		"wrangler": "^4.76.0"
 	},
 	"packageManager": "bun@1.3.6"
 }
