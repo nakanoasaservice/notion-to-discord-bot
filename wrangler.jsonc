@@ -10,6 +10,14 @@
 		"directory": "./dist"
 	},
 
+	/**
+	 * Secrets
+	 * https://developers.cloudflare.com/workers/wrangler/configuration/#secrets-configuration-property
+	 */
+	"secrets": {
+		"required": ["DISCORD_BOT_TOKEN"]
+	},
+
 	// Workers Logs
 	// Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
 	// Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs
