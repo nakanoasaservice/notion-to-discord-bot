@@ -1,148 +1,94 @@
 # Notion to Discord Bot
 
-> Automatically forward Notion webhook events to Discord channels with beautifully formatted embeds.
+> Forward Notion webhook events to Discord channels as beautifully formatted embeds.
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fnakanoasaservice%2Fnotion-to-discord-bot)
 
-_👆 Click to deploy your own private instance to Cloudflare Workers instantly._
+A lightweight Cloudflare Worker that bridges Notion and Discord. Set up an automation in Notion to send a webhook when a database entry is created or updated, and this bot will format the page properties and post them to your Discord channel as a rich embed — complete with a direct link back to the Notion page.
 
-A lightweight Cloudflare Worker that bridges Notion and Discord. When Notion sends webhook events (from database updates, button actions, etc.), this bot automatically formats and sends them to your Discord channels as rich embeds.
+- 🔄 **Real-time**: Notion automation triggers → Discord message, instantly.
+- 🎨 **Rich embeds**: All major property types formatted beautifully.
+- 🔗 **Direct links**: Every embed includes an "Open in Notion" button.
+- ⚙️ **URL-based config**: Webhook URL = settings page. No account needed.
+- 🚀 **Serverless**: Runs on Cloudflare Workers — zero maintenance.
 
-## ✨ Features
+## Quick Start
 
-- 🔄 **Real-time Sync**: Automatically forwards Notion webhook events to Discord.
-- 🎨 **Rich Embeds**: Beautifully formatted Discord embeds supporting all property types.
-- 🔗 **Interactive**: Direct links to Notion pages with clickable buttons.
-- 🚀 **Serverless**: Built on Cloudflare Workers for zero-maintenance, global edge deployment.
+1. **Invite the bot** to your Discord server: [Click here to authorize](https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot)
 
-## 🚀 Getting Started
+2. **Get your Channel ID**: Enable Developer Mode in Discord (User Settings → Advanced → Developer Mode), then right-click the channel you want notifications in and select "Copy Channel ID".
 
-Choose the method that best fits your needs.
+3. **Generate your webhook URL**: Open [notion-to-discord-bot.naas.workers.dev](https://notion-to-discord-bot.naas.workers.dev), enter the Channel ID and an optional title, then copy the generated URL.
 
-### Path A: Quick Usage (Public Instance)
-Use our pre-deployed worker without any setup.
+4. **Configure Notion**: In your Notion database, go to Settings → Automations → New action → Send webhook, and paste the URL.
 
-1. **Invite the Bot**: [Click here to invite the bot to your Discord server](https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot).
-2. **Generate URL**: Visit [notion-to-discord-bot.naas.workers.dev](https://notion-to-discord-bot.naas.workers.dev) to generate your webhook URL.
-3. **Configure Notion**: Use the generated URL in your Notion database settings.
+That's it. When Notion triggers the webhook, the bot will post a formatted embed to your channel.
 
-### Path B: Self-Hosting
-Host your own instance on Cloudflare Workers for full control and custom domains.
+## URL as Configuration
 
-#### Option 1: One-Click Deploy
-1. Click the **"Deploy to Cloudflare"** button at the top of this page.
-2. Follow the on-screen instructions to authorize Cloudflare Workers.
-3. When prompted for **Secret Variables**, enter your **Discord Bot Token** as `DISCORD_BOT_TOKEN`.
+The webhook URL is also a settings page. Every parameter is encoded in the URL itself:
 
-#### Option 2: Manual Deploy
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/nakanoasaservice/notion-to-discord-bot.git
-   cd notion-to-discord-bot
-   pnpm install
-   ```
-2. Set your Discord Bot Token:
-   ```bash
-   wrangler secret put DISCORD_BOT_TOKEN
-   ```
-3. Deploy:
-   ```bash
-   pnpm run deploy
-   ```
-
-> **Note for Self-Hosters**: You will need to create your own Discord Application and Bot in the [Discord Developer Portal](https://discord.com/developers/applications) to get a Bot Token.
-
-## ⚙️ Configuration
-
-Follow these steps to connect Notion to Discord.
-
-### 1. Prepare Discord
-
-1. **Get Channel ID**:
-   - Enable **Developer Mode** in Discord (User Settings → Advanced → Developer Mode).
-   - Right-click the channel you want notifications in and select **"Copy Channel ID"**.
-2. **Ensure Permissions**: Make sure the bot has `Send Messages` permissions in that channel.
-
-### 2. Configure Notion Webhook
-
-**✨ Recommended: Webhook URL Generator**
-Visit [notion-to-discord-bot.naas.workers.dev](https://notion-to-discord-bot.naas.workers.dev) to easily generate your webhook URL.
-
-**Manual Construction:**
-
-Construct your Webhook URL using one of the formats below.
-
-**For Public Instance Users:**
-```
-https://notion-to-discord-bot.naas.workers.dev/{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}
-```
-
-**For Self-Hosted Users:**
-```
-https://your-worker-name.your-subdomain.workers.dev/{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}
-```
-
-**Parameters:**
-- `{DISCORD_CHANNEL_ID}`: The ID you copied from Discord.
-- `title` (optional): Custom title for the embed (defaults to the Notion page title).
-
-**Example:**
 ```
 https://notion-to-discord-bot.naas.workers.dev/1234567890123456789?title=Task%20Updates
 ```
 
-**Where to set this URL:**
-- **Database Webhooks**: Settings → Connections → Webhooks → Add webhook
-- **Button Actions**: Configure a button to send a webhook to this URL
-- **Other Integrations**: Any service that supports Notion webhooks
+If you need to check or change your settings later, just open the URL in a browser — the form will load pre-filled with your current values. Edit the fields, and the URL updates live. Copy the new URL and replace the one in Notion.
 
-## 📋 Supported Properties
+No account, no stored state. Everything lives in the URL.
 
-This bot supports formatting for all major Notion property types:
+**URL parameters:**
+- `{DISCORD_CHANNEL_ID}` (path, required): The Discord channel to post to.
+- `title` (query, optional): Custom title shown at the top of the embed. Defaults to the Notion page title.
 
-- ✅ **Text**: Title, Rich Text, URL, Email, Phone Number
-- ✅ **Select**: Select, Multi-select, Status
-- ✅ **Date**: Date, Created Time, Last Edited Time
-- ✅ **People**: People, Created By, Last Edited By
-- ✅ **Numbers**: Number, Formula (number)
-- ✅ **Boolean**: Checkbox, Formula (boolean)
-- ✅ **Relations**: Relation, Rollup
-- ✅ **Files**: Files (internal & external)
-- ✅ **Other**: Unique ID, Verification, Button
+## Self-Hosting
 
-## 🛠️ Development
+If you want your own private instance with a custom domain or your own Discord bot token:
 
-If you want to contribute or modify the code:
+### One-Click Deploy
+Click the **"Deploy to Cloudflare"** button at the top of this page and follow the instructions. When prompted for secret variables, enter your Discord Bot Token as `DISCORD_BOT_TOKEN`.
 
+### Manual Deploy
 ```bash
-# Install dependencies
+git clone https://github.com/nakanoasaservice/notion-to-discord-bot.git
+cd notion-to-discord-bot
 pnpm install
-
-# Start development server
-pnpm run start
-
-# Run tests
-pnpm run test
-
-# Type checking & Linting
-pnpm run check-types
-pnpm run check:fix
+wrangler secret put DISCORD_BOT_TOKEN
+pnpm run deploy
 ```
 
-### Project Structure
-- `src/index.ts`: Main Hono application & Discord integration
-- `src/formatter.ts`: Notion property formatting logic
-- `src/client.tsx`: Client-side code
+> You'll need to create your own Discord Application and Bot at the [Discord Developer Portal](https://discord.com/developers/applications) to get a Bot Token.
 
-## 🤝 Contributing
+## Supported Notion Properties
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- **Text**: Title, Rich Text, URL, Email, Phone Number
+- **Select**: Select, Multi-select, Status
+- **Date**: Date, Created Time, Last Edited Time
+- **People**: People, Created By, Last Edited By
+- **Numbers**: Number, Formula (number)
+- **Boolean**: Checkbox, Formula (boolean)
+- **Relations**: Relation, Rollup
+- **Files**: Files (internal & external)
+- **Other**: Unique ID, Verification, Button
 
-## 📝 License
+## Development
 
-This project is private and not licensed for public use.
+```bash
+pnpm install       # Install dependencies
+pnpm run start     # Start development server
+pnpm run test      # Run tests
+pnpm run check-types   # Type checking
+pnpm run check:fix     # Lint & format
+```
 
-## 🙏 Acknowledgments
+**Project structure:**
+- `src/index.ts` — Main Hono application & Discord integration
+- `src/formatter.ts` — Notion property formatting logic
+- `src/client.tsx` — Client-side webhook URL generator UI
 
-- Built with [Hono](https://hono.dev/)
-- Powered by [Cloudflare Workers](https://workers.cloudflare.com/)
+## Contributing
+
+Contributions are welcome. Please feel free to submit a Pull Request.
+
+## Acknowledgments
+
+Built with [Hono](https://hono.dev/), powered by [Cloudflare Workers](https://workers.cloudflare.com/).
