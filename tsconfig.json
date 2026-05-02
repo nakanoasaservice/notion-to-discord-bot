@@ -10,14 +10,25 @@
 			"@cloudflare/vitest-pool-workers",
 			"vite/client"
 		],
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"lib": ["ESNext", "DOM"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx/dom",
+
+		"rootDir": ".",
+		"noEmit": true,
+		"isolatedModules": true,
 
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
 		"noPropertyAccessFromIndexSignature": true
-	}
+	},
+	"include": [
+		"./src/**/*.ts",
+		"./src/**/*.tsx",
+		"./test/**/*.ts",
+		"./vite.config.ts",
+		"./worker-configuration.d.ts"
+	]
 }
