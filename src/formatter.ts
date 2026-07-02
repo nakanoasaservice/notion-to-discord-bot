@@ -50,9 +50,9 @@ function formatRichText(richText: RichTextItemResponse): string {
 				case "template_mention":
 					return richText.plain_text;
 				case "page":
-					return `[${richText.plain_text}](https://www.notion.so/${richText.mention.page.id.replaceAll("-", "")})`;
+					return `[${richText.plain_text}](https://app.notion.com/p/${richText.mention.page.id.replaceAll("-", "")})`;
 				case "database":
-					return `[${richText.plain_text}](https://www.notion.so/${richText.mention.database.id.replaceAll("-", "")})`;
+					return `[${richText.plain_text}](https://app.notion.com/p/${richText.mention.database.id.replaceAll("-", "")})`;
 				case "link_mention":
 					return `[${richText.mention.link_mention.title ?? richText.plain_text}](${richText.mention.link_mention.href})`;
 				case "custom_emoji":
@@ -110,8 +110,12 @@ export function formatProperty(property: Property): string {
 					: `${property.unique_id.prefix}-${property.unique_id.number}`;
 		case "relation":
 			return (
-				property.relation.map((relation) => relation.id).join(", ") ||
-				"[No Relations]"
+				property.relation
+					.map(
+						(relation) =>
+							`[Open in Notion](https://app.notion.com/p/${relation.id.replaceAll("-", "")})`,
+					)
+					.join(", ") || "[No Relations]"
 			);
 		case "people":
 			return property.people.map(formatPerson).join(", ") || "[No People]";
