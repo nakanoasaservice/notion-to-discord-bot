@@ -1,6 +1,12 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"includes": ["**", "!.wrangler", "!dist", "!worker-configuration.d.ts"]
+		"includes": [
+			"**",
+			"!.wrangler",
+			"!dist",
+			"!worker-configuration.d.ts",
+			"!skills-lock.json"
+		]
 	}
 }
