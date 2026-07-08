@@ -11,6 +11,12 @@ interface NotionWebhookBody {
 	data: PageObjectResponse;
 }
 
+function truncate(text: string, maxLength: number): string {
+	const chars = [...text]; // Avoid splitting surrogate pairs
+	if (chars.length <= maxLength) return text;
+	return `${chars.slice(0, maxLength - 1).join("")}…`;
+}
+
 async function sendDiscordMessage(
 	token: string,
 	channelId: string,
@@ -52,12 +58,12 @@ app.post("/:discordChannelId", async (c) => {
 	await sendDiscordMessage(c.env.DISCORD_BOT_TOKEN, discordChannelId, {
 		embeds: [
 			{
-				title,
+				title: title === undefined ? undefined : truncate(title, 256),
 				color: 0x2f3437,
 				url: body.data.url,
 				fields: Object.entries(body.data.properties).map(([key, property]) => ({
-					name: key,
-					value: formatProperty(property),
+					name: truncate(key, 256),
+					value: truncate(formatProperty(property), 1024),
 					inline: true,
 				})),
 			},
