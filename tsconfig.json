@@ -5,11 +5,7 @@
 		"moduleResolution": "Bundler",
 		"strict": true,
 		"skipLibCheck": true,
-		"types": [
-			"./worker-configuration.d.ts",
-			"@cloudflare/vitest-pool-workers",
-			"vite/client"
-		],
+		"types": ["./worker-configuration.d.ts", "vite/client"],
 		"lib": ["ESNext", "DOM"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx/dom",
@@ -24,10 +20,10 @@
 		"noUncheckedIndexedAccess": true,
 		"noPropertyAccessFromIndexSignature": true
 	},
+	"exclude": ["test"],
 	"include": [
 		"./src/**/*.ts",
 		"./src/**/*.tsx",
-		"./test/**/*.ts",
 		"./vite.config.ts",
 		"./worker-configuration.d.ts"
 	]
