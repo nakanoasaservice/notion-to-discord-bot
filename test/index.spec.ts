@@ -121,11 +121,11 @@ describe("Notion to Discord Bot worker", () => {
 			}>;
 		};
 
-		expect(message.embeds[0].title).toHaveLength(256);
-		expect(message.embeds[0].title.endsWith("…")).toBe(true);
-		expect(message.embeds[0].fields[0].name).toHaveLength(256);
-		expect(message.embeds[0].fields[0].name.endsWith("…")).toBe(true);
-		expect(message.embeds[0].fields[0].value).toHaveLength(1024);
-		expect(message.embeds[0].fields[0].value.endsWith("…")).toBe(true);
+		expect(message.embeds[0]?.title).toHaveLength(256);
+		expect(message.embeds[0]?.title?.endsWith("…")).toBe(true);
+		expect(message.embeds[0]?.fields[0]?.name).toHaveLength(256);
+		expect(message.embeds[0]?.fields[0]?.name.endsWith("…")).toBe(true);
+		expect(message.embeds[0]?.fields[0]?.value).toHaveLength(1024);
+		expect(message.embeds[0]?.fields[0]?.value.endsWith("…")).toBe(true);
 	});
 });
