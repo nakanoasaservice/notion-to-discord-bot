@@ -23,18 +23,18 @@
 		}
 	},
 	"dependencies": {
-		"hono": "^4.13.3"
+		"hono": "^4.13.5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.9",
-		"@cloudflare/vite-plugin": "^1.53.1",
+		"@biomejs/biome": "^2.5.11",
+		"@cloudflare/vite-plugin": "^1.54.1",
 		"@cloudflare/vitest-pool-workers": "^0.22.0",
 		"@notionhq/client": "^5.26.0",
 		"discord-api-types": "^0.38.53",
 		"typescript": "^7.0.2",
 		"vite": "^8.2.2",
 		"vitest": "^4.1.11",
-		"wrangler": "^4.125.0"
+		"wrangler": "^4.127.0"
 	},
 	"packageManager": "bun@1.3.6"
 }
