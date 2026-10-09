@@ -23,18 +23,18 @@
 		}
 	},
 	"dependencies": {
-		"hono": "^4.13.9"
+		"hono": "^4.13.12"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.14",
-		"@cloudflare/vite-plugin": "^1.60.1",
+		"@biomejs/biome": "^2.5.15",
+		"@cloudflare/vite-plugin": "^1.62.4",
 		"@cloudflare/vitest-pool-workers": "^0.22.0",
-		"@notionhq/client": "^5.26.0",
-		"discord-api-types": "^0.38.55",
+		"@notionhq/client": "^5.27.0",
+		"discord-api-types": "^0.38.56",
 		"typescript": "^7.0.2",
-		"vite": "^8.3.1",
+		"vite": "^8.3.2",
 		"vitest": "^4.1.11",
-		"wrangler": "^4.140.0"
+		"wrangler": "^4.146.0"
 	},
 	"packageManager": "bun@1.3.6"
 }
