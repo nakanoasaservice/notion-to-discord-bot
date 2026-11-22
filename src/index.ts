@@ -12,6 +12,7 @@ interface NotionWebhookBody {
 }
 
 function truncate(text: string, maxLength: number): string {
+	// oxlint-disable-next-line typescript/no-misused-spread -- Preserve code-point-based truncation.
 	const chars = [...text]; // Avoid splitting surrogate pairs
 	if (chars.length <= maxLength) return text;
 	return `${chars.slice(0, maxLength - 1).join("")}…`;
@@ -22,17 +23,14 @@ async function sendDiscordMessage(
 	channelId: string,
 	message: RESTPostAPIChannelMessageJSONBody,
 ) {
-	const response = await fetch(
-		`https://discord.com/api/v10/channels/${channelId}/messages`,
-		{
-			method: "POST",
-			headers: {
-				Authorization: `Bot ${token}`,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(message),
+	const response = await fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, {
+		method: "POST",
+		headers: {
+			Authorization: `Bot ${token}`,
+			"Content-Type": "application/json",
 		},
-	);
+		body: JSON.stringify(message),
+	});
 
 	if (!response.ok) {
 		const errorBody = await response.text();

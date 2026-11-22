@@ -78,10 +78,7 @@ export function formatProperty(property: Property): string {
 		case "select":
 			return property.select?.name ?? "[No Selection]";
 		case "multi_select":
-			return (
-				property.multi_select?.map((select) => select.name).join(", ") ||
-				"[No Selections]"
-			);
+			return property.multi_select?.map((select) => select.name).join(", ") || "[No Selections]";
 		case "date":
 			return formatDate(property.date);
 		case "checkbox":
@@ -161,10 +158,7 @@ export function formatProperty(property: Property): string {
 				case "date":
 					return formatDate(property.rollup.date);
 				case "array":
-					return (
-						property.rollup.array?.map(formatProperty).join(", ") ??
-						"[Empty Rollup Array]"
-					);
+					return property.rollup.array?.map(formatProperty).join(", ") ?? "[Empty Rollup Array]";
 				default:
 					return "[Unsupported Rollup Type]";
 			}
@@ -181,8 +175,7 @@ export function formatProperty(property: Property): string {
 		case "place":
 			return property.place
 				? property.place.name
-					? property.place.address == null ||
-						property.place.name === property.place.address
+					? property.place.address == null || property.place.name === property.place.address
 						? property.place.name
 						: `${property.place.name}\n${property.place.address}`
 					: property.place.address
