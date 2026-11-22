@@ -15,3 +15,6 @@ peerDependencyRules:
     - vitest
   allowedVersions:
     vitest: "*"
+
+# Vite+ selects Node from package.json; do not let pnpm override CI matrices.
+runtimeOnFail: ignore
