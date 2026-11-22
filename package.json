@@ -16,10 +16,10 @@
 		"test": "vp test run"
 	},
 	"dependencies": {
-		"hono": "^4.13.18"
+		"hono": "^4.13.19"
 	},
 	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.69.1",
+		"@cloudflare/vite-plugin": "^1.70.0",
 		"@cloudflare/vitest-plugin": "^1.8.4",
 		"@notionhq/client": "^5.31.1",
 		"discord-api-types": "^0.38.59",
@@ -27,7 +27,7 @@
 		"vite": "catalog:",
 		"vite-plus": "catalog:",
 		"vitest": "catalog:",
-		"wrangler": "^4.161.0"
+		"wrangler": "^4.165.0"
 	},
 	"devEngines": {
 		"runtime": {
