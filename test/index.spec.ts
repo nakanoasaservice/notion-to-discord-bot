@@ -1,5 +1,5 @@
 // test/index.spec.ts
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import app from "../src/index";
 
 describe("Notion to Discord Bot worker", () => {
@@ -11,7 +11,7 @@ describe("Notion to Discord Bot worker", () => {
 			status: 200,
 			text: async () => "",
 		});
-		global.fetch = mockFetch as unknown as typeof global.fetch;
+		globalThis.fetch = mockFetch as unknown as typeof globalThis.fetch;
 	});
 
 	it("responds with 204 No Content", async () => {
@@ -110,10 +110,7 @@ describe("Notion to Discord Bot worker", () => {
 
 		expect(response.status).toBe(204);
 
-		const [, requestInit] = mockFetch.mock.calls[0] as [
-			string,
-			{ body: string },
-		];
+		const [, requestInit] = mockFetch.mock.calls[0] as [string, { body: string }];
 		const message = JSON.parse(requestInit.body) as {
 			embeds: Array<{
 				title: string;

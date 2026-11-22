@@ -32,14 +32,9 @@ function updateUrl(channelId: string, title: string) {
 function App() {
 	const [channelId, setChannelId] = useState(() => getChannelIdFromUrl());
 	const [title, setTitle] = useState(() => getTitleFromUrl());
-	const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
-		"idle",
-	);
+	const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
-	const isValid = useMemo(
-		() => channelId === "" || /^\d{17,19}$/.test(channelId),
-		[channelId],
-	);
+	const isValid = useMemo(() => channelId === "" || /^\d{17,19}$/.test(channelId), [channelId]);
 
 	const generatedUrl = useMemo(() => {
 		const origin = typeof window !== "undefined" ? window.location.origin : "";
@@ -103,9 +98,7 @@ function App() {
 			}}
 		>
 			<header style={{ marginBottom: "2rem", textAlign: "center" }}>
-				<h1 style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>
-					Notion to Discord Bot
-				</h1>
+				<h1 style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>Notion to Discord Bot</h1>
 				<div
 					style={{
 						display: "flex",
@@ -169,36 +162,26 @@ function App() {
 						marginBottom: "0.5rem",
 					}}
 				>
-					👆 Click to deploy your own private instance to Cloudflare Workers
-					instantly.
+					👆 Click to deploy your own private instance to Cloudflare Workers instantly.
 				</p>
 				<p style={{ fontSize: "1.2rem", color: "#666" }}>
-					Automatically forward Notion webhook events to Discord channels with
-					beautifully formatted embeds.
+					Automatically forward Notion webhook events to Discord channels with beautifully formatted
+					embeds.
 				</p>
 			</header>
 
 			<main>
 				<section style={{ marginBottom: "3rem" }}>
-					<h2
-						style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}
-					>
-						How it works
-					</h2>
+					<h2 style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}>How it works</h2>
 					<p>
-						This bot acts as a bridge between Notion and Discord. When you
-						configure a webhook in Notion (e.g., from a database automation), it
-						sends data to this worker, which formats it and posts it to your
-						specified Discord channel.
+						This bot acts as a bridge between Notion and Discord. When you configure a webhook in
+						Notion (e.g., from a database automation), it sends data to this worker, which formats
+						it and posts it to your specified Discord channel.
 					</p>
 				</section>
 
 				<section style={{ marginBottom: "3rem" }}>
-					<h2
-						style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}
-					>
-						Setup Guide
-					</h2>
+					<h2 style={{ borderBottom: "1px solid #eee", paddingBottom: "0.5rem" }}>Setup Guide</h2>
 					<ol style={{ paddingLeft: "1.5rem" }}>
 						<li style={{ marginBottom: "0.5rem" }}>
 							<strong>Invite the Bot:</strong>{" "}
@@ -213,17 +196,15 @@ function App() {
 							.
 						</li>
 						<li style={{ marginBottom: "0.5rem" }}>
-							<strong>Get Channel ID:</strong> Enable Developer Mode in Discord,
-							right-click your desired channel, and select "Copy Channel ID".
+							<strong>Get Channel ID:</strong> Enable Developer Mode in Discord, right-click your
+							desired channel, and select "Copy Channel ID".
 						</li>
 						<li style={{ marginBottom: "0.5rem" }}>
-							<strong>Generate Webhook URL:</strong> Use the form below to
-							create your webhook URL.
+							<strong>Generate Webhook URL:</strong> Use the form below to create your webhook URL.
 						</li>
 						<li style={{ marginBottom: "0.5rem" }}>
-							<strong>Configure Notion:</strong> In your Notion database, go to
-							Settings → Automations → New action → Send webhook, and paste the
-							generated URL.
+							<strong>Configure Notion:</strong> In your Notion database, go to Settings →
+							Automations → New action → Send webhook, and paste the generated URL.
 						</li>
 					</ol>
 				</section>
@@ -272,9 +253,7 @@ function App() {
 								id="channelId"
 								placeholder="e.g. 1234567890123456789"
 								value={channelId}
-								onInput={(e) =>
-									setChannelId((e.target as HTMLInputElement).value)
-								}
+								onInput={(e) => setChannelId((e.target as HTMLInputElement).value)}
 								style={{
 									width: "100%",
 									padding: "0.75rem",
@@ -318,10 +297,7 @@ function App() {
 								onInput={(e) => {
 									const target = e.currentTarget as HTMLTextAreaElement;
 									if (target) {
-										const valueWithoutNewlines = target.value.replace(
-											/\n/g,
-											"",
-										);
+										const valueWithoutNewlines = target.value.replace(/\n/g, "");
 										setTitle(valueWithoutNewlines);
 									}
 								}}
@@ -407,8 +383,7 @@ function App() {
 								disabled={!channelId || !isValid}
 								style={{
 									padding: "0.75rem",
-									backgroundColor:
-										!channelId || !isValid ? "#a5d6a7" : "#2e7d32",
+									backgroundColor: !channelId || !isValid ? "#a5d6a7" : "#2e7d32",
 									color: "white",
 									border: "none",
 									borderRadius: "4px",
@@ -450,11 +425,7 @@ function App() {
 								minHeight: "1.2rem",
 							}}
 						>
-							{copyState === "copied"
-								? "Copied!"
-								: copyState === "failed"
-									? "Failed to copy"
-									: ""}
+							{copyState === "copied" ? "Copied!" : copyState === "failed" ? "Failed to copy" : ""}
 						</small>
 					</div>
 				</section>
@@ -463,6 +434,6 @@ function App() {
 	);
 }
 
-// biome-ignore lint/style/noNonNullAssertion: root is guaranteed to be in the document
+// oxlint-disable-next-line typescript/no-non-null-assertion -- root is guaranteed to be in the document
 const root = document.getElementById("root")!;
 render(<App />, root);

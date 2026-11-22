@@ -37,6 +37,7 @@ If you need to check or change your settings later, just open the URL in a brows
 No account, no stored state. Everything lives in the URL.
 
 **URL parameters:**
+
 - `{DISCORD_CHANNEL_ID}` (path, required): The Discord channel to post to.
 - `title` (query, optional): Custom title shown at the top of the embed. Defaults to the Notion page title.
 
@@ -45,9 +46,11 @@ No account, no stored state. Everything lives in the URL.
 If you want your own private instance with a custom domain or your own Discord bot token:
 
 ### One-Click Deploy
+
 Click the **"Deploy to Cloudflare"** button at the top of this page and follow the instructions. When prompted for secret variables, enter your Discord Bot Token as `DISCORD_BOT_TOKEN`.
 
 ### Manual Deploy
+
 ```bash
 git clone https://github.com/nakanoasaservice/notion-to-discord-bot.git
 cd notion-to-discord-bot
@@ -81,6 +84,7 @@ pnpm run check:fix     # Lint & format
 ```
 
 **Project structure:**
+
 - `src/index.ts` — Main Hono application & Discord integration
 - `src/formatter.ts` — Notion property formatting logic
 - `src/client.tsx` — Client-side webhook URL generator UI
@@ -92,3 +96,11 @@ Contributions are welcome. Please feel free to submit a Pull Request.
 ## Acknowledgments
 
 Built with [Hono](https://hono.dev/), powered by [Cloudflare Workers](https://workers.cloudflare.com/).
+
+## Development toolchain
+
+Use Node.js 24 and the pnpm version pinned in `package.json`.
+Run `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm test`, and `pnpm build`.
+Vite+ provides formatting, linting, type checks, tests and builds. Tests run
+locally in the Cloudflare Workers runtime. Use `pnpm run dev` to develop and
+`pnpm run cf-typegen` to regenerate Worker binding types.
