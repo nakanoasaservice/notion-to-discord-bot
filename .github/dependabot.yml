@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "bun"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
@@ -17,6 +17,10 @@ updates:
         patterns:
           - "*"
     ignore:
+      - dependency-name: "vite"
+      - dependency-name: "vite-plus"
+      - dependency-name: "vitest"
+      - dependency-name: "@voidzero-dev/vite-plus-core"
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
 

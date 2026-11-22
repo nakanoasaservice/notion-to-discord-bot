@@ -104,3 +104,7 @@ Run `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm test`, and `pnpm build
 Vite+ provides formatting, linting, type checks, tests and builds. Tests run
 locally in the Cloudflare Workers runtime. Use `pnpm run dev` to develop and
 `pnpm run cf-typegen` to regenerate Worker binding types.
+
+Update Vite+ and its bundled tools together with `vp migrate`, then update the
+pinned `setup-vp` version in CI and refresh the pnpm lockfile. Run the project's
+checks before committing toolchain updates.
