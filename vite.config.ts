@@ -1,7 +1,8 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { cloudflareTest } from "@cloudflare/vitest-plugin";
 import { defineConfig, lazyPlugins } from "vite-plus";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	fmt: {
 		useTabs: true,
 		ignorePatterns: [
@@ -30,5 +31,9 @@ export default defineConfig({
 		},
 		options: { typeAware: true, typeCheck: true },
 	},
-	plugins: lazyPlugins(() => [cloudflare()]),
-});
+	plugins: lazyPlugins(() =>
+		mode === "test"
+			? [cloudflareTest({ wrangler: { configPath: "./wrangler.jsonc" } })]
+			: [cloudflare()],
+	),
+}));
