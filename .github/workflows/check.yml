@@ -21,34 +21,16 @@ jobs:
       - run: git diff --exit-code
 
   dependabot-automerge:
-    name: Merge Dependabot PR
-    needs: check
+    name: Enable auto-merge for Dependabot PR
     if: github.actor == 'dependabot[bot]' && github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
-      checks: read
       contents: write
       pull-requests: write
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-      PR_URL: ${{ github.event.pull_request.html_url }}
     steps:
-      - name: Wait for Cloudflare Workers preview build
+      # GitHub merges once the required checks in the main ruleset pass
+      # (Check and Workers Builds: notion-to-discord-bot).
+      - run: gh pr merge --auto --merge "$PR_URL"
         env:
-          CHECK_NAME: "Workers Builds: notion-to-discord-bot"
-        run: |
-          for _ in $(seq 1 60); do
-            conclusion=$(gh api -X GET "repos/$GITHUB_REPOSITORY/commits/$HEAD_SHA/check-runs" \
-              -f check_name="$CHECK_NAME" \
-              -q '.check_runs[0] | select(.status == "completed") | .conclusion')
-            if [ -n "$conclusion" ]; then
-              echo "$CHECK_NAME: $conclusion"
-              [ "$conclusion" = "success" ] && exit 0
-              exit 1
-            fi
-            sleep 15
-          done
-          echo "Timed out waiting for $CHECK_NAME"
-          exit 1
-      - run: gh pr merge --merge --match-head-commit "$HEAD_SHA" "$PR_URL"
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
