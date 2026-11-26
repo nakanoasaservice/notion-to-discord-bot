@@ -16,26 +16,26 @@
     "test": "vp test run"
   },
   "dependencies": {
-    "hono": "^4.13.19"
+    "hono": "^4.13.22"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.70.1",
-    "@cloudflare/vitest-plugin": "^1.8.4",
-    "@notionhq/client": "^5.31.1",
-    "discord-api-types": "^0.38.59",
+    "@cloudflare/vite-plugin": "^1.70.2",
+    "@cloudflare/vitest-plugin": "^1.9.2",
+    "@notionhq/client": "^5.32.0",
+    "discord-api-types": "^0.38.60",
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:",
     "vitest": "catalog:",
-    "wrangler": "^4.165.0"
+    "wrangler": "^4.168.0"
   },
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24.22.1"
+      "version": "26.13.1"
     }
   },
-  "packageManager": "pnpm@12.21.0",
+  "packageManager": "pnpm@12.23.0",
   "cloudflare": {
     "bindings": {
       "DISCORD_BOT_TOKEN": {
