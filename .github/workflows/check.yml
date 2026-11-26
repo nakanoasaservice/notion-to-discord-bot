@@ -19,3 +19,17 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: git diff --exit-code
+
+  dependabot-automerge:
+    name: Merge Dependabot PR
+    needs: check
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - run: gh pr merge --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
