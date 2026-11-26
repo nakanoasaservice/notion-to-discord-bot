@@ -1,46 +1,46 @@
 {
-	"name": "notion-to-discord-bot",
-	"version": "0.0.0",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"build": "vp build",
-		"cf-typegen": "wrangler types",
-		"check-types": "tsc --noEmit",
-		"check:fix": "vp check --fix",
-		"check": "vp check",
-		"deploy": "pnpm run build && wrangler deploy",
-		"dev": "vp dev",
-		"preview": "pnpm run build && vp preview",
-		"start": "wrangler dev",
-		"test": "vp test run"
-	},
-	"dependencies": {
-		"hono": "^4.13.19"
-	},
-	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.70.1",
-		"@cloudflare/vitest-plugin": "^1.8.4",
-		"@notionhq/client": "^5.31.1",
-		"discord-api-types": "^0.38.59",
-		"typescript": "^7.0.2",
-		"vite": "catalog:",
-		"vite-plus": "catalog:",
-		"vitest": "catalog:",
-		"wrangler": "^4.165.0"
-	},
-	"devEngines": {
-		"runtime": {
-			"name": "node",
-			"version": "24.22.1"
-		}
-	},
-	"packageManager": "pnpm@12.21.0",
-	"cloudflare": {
-		"bindings": {
-			"DISCORD_BOT_TOKEN": {
-				"description": "Discord Developer Portal: open your application → Bot → Reset Token."
-			}
-		}
-	}
+  "name": "notion-to-discord-bot",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vp build",
+    "cf-typegen": "wrangler types",
+    "check-types": "tsc --noEmit",
+    "check:fix": "vp check --fix",
+    "check": "vp check",
+    "deploy": "pnpm run build && wrangler deploy",
+    "dev": "vp dev",
+    "preview": "pnpm run build && vp preview",
+    "start": "wrangler dev",
+    "test": "vp test run"
+  },
+  "dependencies": {
+    "hono": "^4.13.19"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.70.1",
+    "@cloudflare/vitest-plugin": "^1.8.4",
+    "@notionhq/client": "^5.31.1",
+    "discord-api-types": "^0.38.59",
+    "typescript": "^7.0.2",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:",
+    "wrangler": "^4.165.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.22.1"
+    }
+  },
+  "packageManager": "pnpm@12.21.0",
+  "cloudflare": {
+    "bindings": {
+      "DISCORD_BOT_TOKEN": {
+        "description": "Discord Developer Portal: open your application → Bot → Reset Token."
+      }
+    }
+  }
 }
