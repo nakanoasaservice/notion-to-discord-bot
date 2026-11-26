@@ -1,0 +1,48 @@
+# Notion to Discord Bot
+
+> Free, hosted Discord bot on Cloudflare Workers that posts Notion database automation events to a Discord channel as rich embeds. No sign-up and no server-side state: the whole configuration (the Discord channel ID and an optional title) is encoded in the URL that you paste into Notion.
+
+Hosted instance: https://notion-to-discord-bot.naas.workers.dev/
+
+## How to build the Notion webhook URL
+
+You can construct the URL directly from a Discord channel ID; no API call or account is needed.
+
+1. Invite the bot to the Discord server (one time per server): https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot
+   For a private channel, also give the bot access to that channel.
+2. Get the channel ID: in Discord, enable **User Settings → Advanced → Developer Mode**, then right-click the channel and choose **Copy Channel ID**. It is a 17–19 digit number.
+3. Build the URL:
+   `https://notion-to-discord-bot.naas.workers.dev/{DISCORD_CHANNEL_ID}`
+4. Optional: add an embed title as the `title` query parameter, URL-encoded:
+   `https://notion-to-discord-bot.naas.workers.dev/{DISCORD_CHANNEL_ID}?title=Task%20Updates`
+5. In Notion, open the database → **Settings → Automations → New automation**, choose a trigger (e.g. "Page added" or "Property edited"), add the action **Send webhook**, and paste the URL. No custom headers are needed.
+
+Example:
+
+- Channel ID: `123456789012345678`
+- Notion webhook URL: `https://notion-to-discord-bot.naas.workers.dev/123456789012345678?title=New%20Tasks`
+
+Notes:
+
+- The URL contains no secret, but anyone who has it can make the bot post to that channel, so don't publish it.
+- Opening the generated URL in a browser shows a settings page pre-filled with its values, where the channel and title can be edited.
+
+## What gets posted
+
+Each Notion event becomes one Discord embed with the page's properties as fields and an "Open in Notion" link button. Supported property types include title, rich text, number, select, multi-select, status, date, people, files, checkbox, URL, email, phone, formula, relation, rollup, created/last edited time and by, unique ID, verification, place, and button.
+
+## Endpoint
+
+- `POST /{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}`: receives the JSON body of a Notion "Send webhook" automation action and posts it to the Discord channel.
+- `GET /{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}`: the settings / URL generator page.
+
+## Links
+
+- [URL generator](https://notion-to-discord-bot.naas.workers.dev/): enter a channel ID, get the Notion webhook URL
+- [Source code and README](https://github.com/nakanoasaservice/notion-to-discord-bot): MIT licensed; can be self-hosted on Cloudflare Workers with your own bot token
+- [Notion: Database automations](https://www.notion.com/help/database-automations): how to add a "Send webhook" action
+- [Discord: Where can I find my User/Server/Message ID?](https://support.discord.com/hc/en-us/articles/206346498): how to copy a channel ID
+
+## Optional
+
+- [Notion to Discord Relay](https://notion-to-discord-relay.naas.workers.dev/): sister project that posts through a Discord channel webhook instead of a bot, so no bot needs to be added to the server
