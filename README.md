@@ -12,6 +12,9 @@ A lightweight Cloudflare Worker that bridges Notion and Discord. Set up an autom
 - ⚙️ **URL-based config**: Webhook URL = settings page. No account needed.
 - 🚀 **Serverless**: Runs on Cloudflare Workers — zero maintenance.
 
+> [!TIP]
+> **Don't want to invite a bot?** Try our sister project [Notion to Discord Relay](https://notion-to-discord-relay.naas.workers.dev/). It posts to Discord using a channel's Webhook URL, so there's no need to add a bot to your server.
+
 ## Quick Start
 
 1. **Invite the bot** to your Discord server: [Click here to authorize](https://discord.com/oauth2/authorize?client_id=1314524073170042962&permissions=2048&integration_type=0&scope=bot)
