@@ -19,3 +19,18 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: git diff --exit-code
+
+  dependabot-automerge:
+    name: Enable auto-merge for Dependabot PR
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # GitHub merges once the required checks in the main ruleset pass
+      # (Check and Workers Builds: notion-to-discord-bot).
+      - run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
