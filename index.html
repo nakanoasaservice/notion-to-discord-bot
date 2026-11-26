@@ -3,32 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notion to Discord Bot</title>
+    <title>Notion to Discord Bot: Send Notion database updates to Discord</title>
     <meta
       name="description"
-      content="Automatically forward Notion webhook events to Discord channels with beautifully formatted embeds. Deploy to Cloudflare Workers instantly."
+      content="Free, no sign-up Discord bot that posts Notion database automation events to a Discord channel as rich embeds. Enter a channel ID, get a URL for Notion's Send webhook action."
     />
-    <meta name="keywords" content="Notion, Discord, webhook, bot, Cloudflare Workers, automation" />
     <meta name="author" content="nakanoasaservice" />
-    <link rel="canonical" href="https://github.com/nakanoasaservice/notion-to-discord-bot" />
+    <link rel="canonical" href="https://notion-to-discord-bot.naas.workers.dev/" />
+    <link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Notion to Discord Bot" />
     <meta
       property="og:description"
-      content="Automatically forward Notion webhook events to Discord channels with beautifully formatted embeds."
+      content="Post Notion database automation events to Discord as rich embeds. No sign-up: invite the bot and use a channel ID."
     />
-    <meta property="og:url" content="https://github.com/nakanoasaservice/notion-to-discord-bot" />
+    <meta property="og:url" content="https://notion-to-discord-bot.naas.workers.dev/" />
     <meta property="og:site_name" content="Notion to Discord Bot" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Notion to Discord Bot" />
     <meta
       name="twitter:description"
-      content="Automatically forward Notion webhook events to Discord channels with beautifully formatted embeds."
+      content="Post Notion database automation events to Discord as rich embeds. No sign-up: invite the bot and use a channel ID."
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Notion to Discord Bot",
+        "url": "https://notion-to-discord-bot.naas.workers.dev/",
+        "description": "Discord bot that posts Notion database automation events to a Discord channel as rich embeds. After inviting the bot, the Notion webhook URL is https://notion-to-discord-bot.naas.workers.dev/{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "license": "https://opensource.org/licenses/MIT",
+        "codeRepository": "https://github.com/nakanoasaservice/notion-to-discord-bot"
+      }
+    </script>
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#37352f" />
@@ -48,6 +64,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Notion to Discord Bot</h1>
+      <p>
+        Posts Notion database automation events to a Discord channel as rich embeds. Invite the bot
+        to your server, copy the channel ID, and use
+        <code
+          >https://notion-to-discord-bot.naas.workers.dev/{DISCORD_CHANNEL_ID}?title={OPTIONAL_TITLE}</code
+        >
+        as the URL of a "Send webhook" action in a Notion database automation. Details:
+        <a href="/llms.txt">llms.txt</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/client.tsx"></script>
   </body>
 </html>

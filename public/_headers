@@ -1,0 +1,12 @@
+# Generated URLs point at a specific Discord channel: keep them out of
+# search indexes.
+/:discordChannelId
+  X-Robots-Tag: noindex, nofollow
+
+# The placeholder above also matches these top-level files; keep them indexable.
+/llms.txt
+  ! X-Robots-Tag
+/robots.txt
+  ! X-Robots-Tag
+/sitemap.xml
+  ! X-Robots-Tag

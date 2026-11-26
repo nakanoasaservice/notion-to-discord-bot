@@ -4,6 +4,8 @@
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fnakanoasaservice%2Fnotion-to-discord-bot)
 
+🤖 Using an AI assistant? Point it at [`/llms.txt`](https://notion-to-discord-bot.naas.workers.dev/llms.txt) — it describes how to build the URL for Notion from a Discord channel ID.
+
 A lightweight Cloudflare Worker that bridges Notion and Discord. Set up an automation in Notion to send a webhook when a database entry is created or updated, and this bot will format the page properties and post them to your Discord channel as a rich embed — complete with a direct link back to the Notion page.
 
 - 🔄 **Real-time**: Notion automation triggers → Discord message, instantly.
