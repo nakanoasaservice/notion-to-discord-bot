@@ -1,12 +1,12 @@
 {
-	"editor.defaultFormatter": "oxc.oxc-vscode",
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "explicit"
-	},
-	"files.associations": {
-		".dev.vars": "dotenv",
-		".dev.vars.example": "dotenv"
-	},
-	"cSpell.words": ["automations", "esbuild", "naas", "notionhq", "workerd"]
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "files.associations": {
+    ".dev.vars": "dotenv",
+    ".dev.vars.example": "dotenv"
+  },
+  "cSpell.words": ["automations", "esbuild", "naas", "notionhq", "workerd"]
 }

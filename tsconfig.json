@@ -1,25 +1,25 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"strict": true,
-		"skipLibCheck": true,
-		"types": ["./worker-configuration.d.ts", "vite/client"],
-		"lib": ["ESNext", "DOM"],
-		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx/dom",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["./worker-configuration.d.ts", "vite/client"],
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx/dom",
 
-		"rootDir": ".",
-		"noEmit": true,
-		"isolatedModules": true,
+    "rootDir": ".",
+    "noEmit": true,
+    "isolatedModules": true,
 
-		"forceConsistentCasingInFileNames": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUncheckedIndexedAccess": true,
-		"noPropertyAccessFromIndexSignature": true
-	},
-	"exclude": ["test"],
-	"include": ["./src/**/*.ts", "./src/**/*.tsx", "./vite.config.ts", "./worker-configuration.d.ts"]
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true
+  },
+  "exclude": ["test"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "./vite.config.ts", "./worker-configuration.d.ts"]
 }
